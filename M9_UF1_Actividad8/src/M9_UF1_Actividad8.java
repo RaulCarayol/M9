@@ -28,6 +28,7 @@ public class M9_UF1_Actividad8 {
 
 		String alias = "Raul";
 
+		// Cambios
 		Key key = keystore.getKey(alias, "soyprogramador".toCharArray());
 		if (key instanceof PrivateKey) {
 			// Get certificate of public key
@@ -41,7 +42,6 @@ public class M9_UF1_Actividad8 {
 			KeyPair par=new KeyPair(publicKey, (PrivateKey) key);
 			imprimirFichero(par);
 		}
-
 	}
 
 	// Imprime la clave pública y privada generada en sus respectivos archivos
