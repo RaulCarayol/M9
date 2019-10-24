@@ -25,7 +25,8 @@ public class activitat2 {
     System.out.println("Completat");
     }
 
-    // Fil Runnable
+    // Fil Runnable 
+//mola
     class ExecutaFil implements Runnable {
         @Override
         public void run() {
