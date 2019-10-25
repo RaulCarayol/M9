@@ -28,6 +28,7 @@ public class activitat2 {
     // Fil Runnable 
 //mola
     class ExecutaFil implements Runnable {
+    	
         @Override
         public void run() {
             Calendar calendario = new GregorianCalendar();
