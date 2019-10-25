@@ -18,15 +18,14 @@ public class activitat2 {
     final Runnable ob = new activitat2().new ExecutaFil();
     // Programa Fil, s’inicia als 5 segons i després es va executant cada 6 segons
     schExService.scheduleWithFixedDelay(ob, 5, 6, TimeUnit.SECONDS);
-    // Espera per acabar 10 segons
-    schExService.awaitTermination(10, TimeUnit.SECONDS);
+    // Espera per acabar 34 segons
+    schExService.awaitTermination(34, TimeUnit.SECONDS);
     // shutdown .
     schExService.shutdownNow();
     System.out.println("Completat");
     }
 
     // Fil Runnable 
-//mola
     class ExecutaFil implements Runnable {
     	
         @Override
