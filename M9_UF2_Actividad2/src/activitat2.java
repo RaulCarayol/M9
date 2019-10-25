@@ -31,6 +31,7 @@ public class activitat2 {
     	
         @Override
         public void run() {
+        	
             Calendar calendario = new GregorianCalendar();
             System.out.println("Hora execució tasca: "+
                 calendario.get(Calendar.HOUR_OF_DAY) + ":" +
