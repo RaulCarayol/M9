@@ -11,7 +11,11 @@ public class Fibonacci {
     }
 	
 	public static void main(String[] args) {
-
+		long TiempoInicial=System.currentTimeMillis();
+		System.out.println("Calculat : "+ calculaFibonacci(32));
+		long tiempoEjecucion=((System.currentTimeMillis()-TiempoInicial)/1000);
+		System.out.println("Tiempo de ejecución :" +
+							tiempoEjecucion);
 	}
 
 }
