@@ -12,11 +12,11 @@ public class activitat2 {
     Calendar calendario = new GregorianCalendar();
     System.out.println("Inici: "+ calendario.get(Calendar.HOUR_OF_DAY) + ":" + calendario.get(Calendar.MINUTE) +
         ":" + calendario.get(Calendar.SECOND));
-    // Crea un pool de 2 fils
+    // Crea un pool de 4 fils
     final ScheduledExecutorService schExService = Executors.newScheduledThreadPool(4);
     // Crea objecte Runnable.
     final Runnable ob = new activitat2().new ExecutaFil();
-    // Programa Fil, s’inicia als 5 segons i després es va executant cada 3 segons
+    // Programa Fil, s’inicia als 5 segons i després es va executant cada 6 segons
     schExService.scheduleWithFixedDelay(ob, 5, 6, TimeUnit.SECONDS);
     // Espera per acabar 10 segons
     schExService.awaitTermination(10, TimeUnit.SECONDS);
