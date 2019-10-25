@@ -13,7 +13,7 @@ public class activitat2 {
     System.out.println("Inici: "+ calendario.get(Calendar.HOUR_OF_DAY) + ":" + calendario.get(Calendar.MINUTE) +
         ":" + calendario.get(Calendar.SECOND));
     // Crea un pool de 2 fils
-    final ScheduledExecutorService schExService = Executors.newScheduledThreadPool(2);
+    final ScheduledExecutorService schExService = Executors.newScheduledThreadPool(4);
     // Crea objecte Runnable.
     final Runnable ob = new activitat2().new ExecutaFil();
     // Programa Fil, s’inicia als 2 segons i després es va executant cada 3 segons
