@@ -20,14 +20,14 @@ public class activitat2 {
     schExService.scheduleWithFixedDelay(ob, 5, 6, TimeUnit.SECONDS);
     // Espera per acabar 34 segons
     schExService.awaitTermination(34, TimeUnit.SECONDS);
-    // shutdown .
+    // shutdown (Acaba tots els fils)
     schExService.shutdownNow();
+    //Mostra "Completat" al final del programa
     System.out.println("Completat");
     }
 
     // Fil Runnable 
     class ExecutaFil implements Runnable {
-    	
         @Override
         public void run() {
         	
