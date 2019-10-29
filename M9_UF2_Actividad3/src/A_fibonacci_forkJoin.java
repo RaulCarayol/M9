@@ -19,9 +19,9 @@ public class A_fibonacci_forkJoin extends RecursiveTask<Long> {
     public static void main(String[] args){
     	long TiempoInicial=System.currentTimeMillis();
         ForkJoinPool pool = new ForkJoinPool();
-        System.out.println("Calculat:  " + pool.invoke(new A_fibonacci_forkJoin(45)));
-		long tiempoEjecucion=((System.currentTimeMillis()-TiempoInicial)/1000);
+        System.out.println("Calculat:  " + pool.invoke(new A_fibonacci_forkJoin(41)));
+		long tiempoEjecucion=((System.currentTimeMillis()-TiempoInicial));
 		System.out.println("Tiempo de ejecución : " +
-							tiempoEjecucion);
+							tiempoEjecucion/100d);
     }
 }
