@@ -3,7 +3,6 @@
   import java.util.concurrent.ForkJoinPool;
  
   public class MaximTask extends RecursiveTask<Short> {
-	  //private static final int LLINDAR=10000000;
 	  private static final int LLINDAR=10000000;
 	  private short[] arr ;
 	  private int inici, fi;
@@ -42,9 +41,8 @@
 
 	  @Override
 	  protected Short compute() {
+		  //Mostrar el contador y el fragmento de array(inicio y fin)
 		  System.out.println("comptador"+comptador+" :  inici:"+ inici + "  Fi  " +fi);
-		  //Mostrar fragmento array
-		  //System.out.println("Fragmento array "+arr.toString());
 		  comptador++;
 		  if(fi - inici <= LLINDAR){
 			  return getMaxSeq();
