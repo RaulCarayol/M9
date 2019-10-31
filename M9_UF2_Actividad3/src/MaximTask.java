@@ -7,11 +7,13 @@
 	  private static final int LLINDAR=10000000;
 	  private short[] arr ;
 	  private int inici, fi;
+	  public static int comptador=1;
 
 	  public MaximTask(short[] arr, int inici, int fi) {
 		  this.arr = arr;
 		  this.inici = inici;
 		  this.fi = fi;
+
 	  }
 
 	  private short getMaxSeq(){
@@ -40,7 +42,10 @@
 
 	  @Override
 	  protected Short compute() {
-		  System.out.println("comptador :  inici:"+ inici + "  Fi  " +fi);
+		  System.out.println("comptador"+comptador+" :  inici:"+ inici + "  Fi  " +fi);
+		  //Mostrar fragmento array
+		  //System.out.println("Fragmento array "+arr.toString());
+		  comptador++;
 		  if(fi - inici <= LLINDAR){
 			  return getMaxSeq();
 		  }else{
@@ -56,13 +61,12 @@
 		  System.out.println("Inici càlcul");
 		  ForkJoinPool pool = new ForkJoinPool();
 
-		  int inici=0;
+		  int inici=0,comptador=0;
 		  int fi= data.length;
 		  MaximTask tasca = new MaximTask(data, inici, fi);
 
 		  long time = System.currentTimeMillis();
 		  // crida la tasca i espera que es completin
-		  //int result1 = pool.invoke(tasca);
 		  int result1 = (int) pool.invoke(tasca);
 		  // màxim
 		  int result= tasca.join();
