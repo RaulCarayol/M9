@@ -28,17 +28,17 @@ public class HeretaFil extends Thread {
 		
 		// Hem creat dos fils primer i segon, però no s’han executat.
 		// Per poder−lo executar s’ha de cridar al mètode start()
-		primer.start();
-		segon.start();
-		tercero.start();
-		cuarto.start();
-		quinto.start();
-		sexto.start();
-		septimo.start();
-		octavo.start();
-		noveno.start();
-		decimo.start();
-		undecimo.start();
+		primer.run();
+		segon.run();
+		tercero.run();
+		cuarto.run();
+		quinto.run();
+		sexto.run();
+		septimo.run();
+		octavo.run();
+		noveno.run();
+		decimo.run();
+		undecimo.run();
 
 		System.out.println("Final Fil Principal");
 

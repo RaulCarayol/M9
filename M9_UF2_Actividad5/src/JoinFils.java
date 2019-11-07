@@ -1,6 +1,6 @@
 
 
-public class TiradaDaus {
+class TiradaDaus {
 	private int tiradaDau;
 
 	public TiradaDaus (int e) {
@@ -12,15 +12,15 @@ public class TiradaDaus {
 	}
 
 	public synchronized void setSumaTirada(int e) {
-		tiradaDau += e;
+		 tiradaDau = e;
 	}
 }
-/*
+
 public class JoinFils implements Runnable {
 
-	private TiradaDaus xobj;
+	private JoinFils xobj;
 
-	public JoinFils(TiradaDaus m) {
+	public JoinFils(JoinFils m) {
 		xobj=m;
 	}
 	public void run(){
@@ -35,7 +35,7 @@ public class JoinFils implements Runnable {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		TiradaDaus ans=new TiradaDaus(0);
+		JoinFils ans=new JoinFils(0);
 
 		JoinFils obj1 = new JoinFils(ans);
 		JoinFils obj2 = new JoinFils(ans);
@@ -57,4 +57,4 @@ public class JoinFils implements Runnable {
 	}
 }
 
-*/
+
