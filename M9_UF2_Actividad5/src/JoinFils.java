@@ -12,15 +12,15 @@ class TiradaDaus {
 	}
 
 	public synchronized void setSumaTirada(int e) {
-		 tiradaDau = e;
+		tiradaDau += e;
 	}
 }
 
 public class JoinFils implements Runnable {
 
-	private JoinFils xobj;
+	private TiradaDaus xobj;
 
-	public JoinFils(JoinFils m) {
+	public JoinFils(TiradaDaus m) {
 		xobj=m;
 	}
 	public void run(){
@@ -33,9 +33,8 @@ public class JoinFils implements Runnable {
 		}catch (InterruptedException e){
 		}
 	}
-
 	public static void main(String[] args) throws InterruptedException {
-		JoinFils ans=new JoinFils(0);
+		TiradaDaus ans=new TiradaDaus(0);
 
 		JoinFils obj1 = new JoinFils(ans);
 		JoinFils obj2 = new JoinFils(ans);
@@ -52,9 +51,11 @@ public class JoinFils implements Runnable {
 		fil_1.join(); //Espera el fil_1 que el fil principal, el que l’ha invocat acabi
 		fil_2.join();
 		fil_3.join();
+
 		System.out.println("Total tirada: "+ ans.getSumaTirada());
 		System.out.println("Final Fil Principal");
-	}
-}
 
+	}
+
+}
 
