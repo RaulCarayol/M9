@@ -1,3 +1,4 @@
+package ActividadNaus;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -59,7 +60,7 @@ public class NauEspaial extends javax.swing.JFrame {
 
 	        final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	         width = screenSize.width - left - right;
-	         height = screenSize.height - top;
+	         height = screenSize.height - top - bottom;
 	        
 	        f.setSize(width, height);
 	        f.setVisible(true);
@@ -68,9 +69,10 @@ public class NauEspaial extends javax.swing.JFrame {
 	class PanelNau extends JPanel implements Runnable{
 	    private int numNaus=3;    
 	    Nau[] nau;
-
+	    Nave navePrincipal;
 	    public PanelNau(){        
 	        nau = new Nau[numNaus];
+	  
 	        for (int i=0;i<nau.length;i++) {
 	            Random rand = new Random();
 	            int velocitat=(rand.nextInt(3)+5)*1;
@@ -80,6 +82,7 @@ public class NauEspaial extends javax.swing.JFrame {
 	            int dY=rand.nextInt(3)+1;
 	            nau[i]= new Nau(i,posX,posY,dX,dY,velocitat);
 	            }
+	        navePrincipal= new Nave(300);
 	        Thread n = new Thread(this);
 	        n.start();   
 	        }
@@ -95,60 +98,18 @@ public class NauEspaial extends javax.swing.JFrame {
 
 	    public void paintComponent(Graphics g) {
 	        super.paintComponent(g);
-	        for(int i=0; i<nau.length;++i) nau[i].pinta(g);
-	        }
-	    }
-
-
-	class Nau extends Thread {
-	    private int numero;
-	    private int x,y;
-	    private int dsx,dsy,v;
-	    private int tx = 215;
-	    private int ty = 190;
-
-	    private String img = "/images/nau.jpg";
-	    private Image image;
-
-	    public Nau(int numero, int x, int y, int dsx, int dsy, int v ) {
-	        this.numero = numero;
 	        
-	        this.x=x;
-	        this.y=y;
-	        this.dsx=dsx;
-	        this.dsy=dsy;
-	        this.v=v;
-	        image = new ImageIcon(Nau.class.getResource("/images/nau.png")).getImage();
-	        Thread t = new Thread(this); 
-	        t.start();
+	        for(int i=0; i<nau.length;++i) {
 	        
+	        	synchronized (nau[i]) {
+	        		nau[i].pinta(g);
+				} 
+	        	}
+	        	navePrincipal.pinta(g);
+	        }
+	    
 	    }
-	    
-	    
-	    public int velocitat (){ 
-	        return v;
-	        }
-	    
-	    public void moure (){
-	        x=x + dsx;
-	        y=y + dsy;
-	        // si arriva als marges ...
-	        if ( x>=NauEspaial.width - tx || x<= 0) dsx = - dsx;
-	        if ( y >= NauEspaial.height - ty || y<=0 ) dsy = - dsy;
-	        }
-	    
-	    public void pinta (Graphics g) {
-	        Graphics2D g2d = (Graphics2D)g;
-	        g2d.drawImage(this.image, x, y, null);
-	        }
-	    
 
-	    public void run() {
-	        while (true) { 
-	            System.out.println("Movent nau numero " + this.numero);
-	            try { Thread.sleep(this.v); } catch (Exception e) {}
-	            moure();
-	            }
-	        }
-	    }
+
+	
 
