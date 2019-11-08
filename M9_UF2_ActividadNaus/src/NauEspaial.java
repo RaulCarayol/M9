@@ -66,7 +66,7 @@ public class NauEspaial extends javax.swing.JFrame {
 	        }
 	    }
 	class PanelNau extends JPanel implements Runnable{
-	    private int numNaus=10;    
+	    private int numNaus=200;    
 	    Nau[] nau;
 
 	    public PanelNau(){        
@@ -104,8 +104,8 @@ public class NauEspaial extends javax.swing.JFrame {
 	    private int numero;
 	    private int x,y;
 	    private int dsx,dsy,v;
-	    private int tx = 10;
-	    private int ty = 10;
+	    private int tx = 200;
+	    private int ty = 200;
 
 	    private String img = "/images/nau.jpg";
 	    private Image image;
@@ -130,8 +130,8 @@ public class NauEspaial extends javax.swing.JFrame {
 	        x=x + dsx;
 	        y=y + dsy;
 	        // si arriva als marges ...
-	        if ( x>=NauEspaial.width - tx-160 || x<= tx) dsx = - dsx;
-	        if ( y >= NauEspaial.height - ty-160 || y<=ty ) dsy = - dsy;
+	        if ( x>=NauEspaial.width - tx || x<= 0) dsx = - dsx;
+	        if ( y >= NauEspaial.height - ty || y<=0 ) dsy = - dsy;
 	        }
 	    
 	    public void pinta (Graphics g) {
