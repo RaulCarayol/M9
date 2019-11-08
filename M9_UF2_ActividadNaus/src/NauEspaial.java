@@ -66,7 +66,7 @@ public class NauEspaial extends javax.swing.JFrame {
 	        }
 	    }
 	class PanelNau extends JPanel implements Runnable{
-	    private int numNaus=200;    
+	    private int numNaus=3;    
 	    Nau[] nau;
 
 	    public PanelNau(){        
@@ -87,7 +87,7 @@ public class NauEspaial extends javax.swing.JFrame {
 	    public void run() {
 	        System.out.println("Inici fil repintar");
 	        while(true) {
-	            try { Thread.sleep(10);} catch(Exception e) {} // espero 0,1 segons
+	            try { Thread.sleep(10);} catch(Exception e) {} // espero 0,01 segons
 	            System.out.println("Repintant");
 	            repaint();            
 	            }                   
@@ -104,14 +104,15 @@ public class NauEspaial extends javax.swing.JFrame {
 	    private int numero;
 	    private int x,y;
 	    private int dsx,dsy,v;
-	    private int tx = 200;
-	    private int ty = 200;
+	    private int tx = 215;
+	    private int ty = 190;
 
 	    private String img = "/images/nau.jpg";
 	    private Image image;
 
 	    public Nau(int numero, int x, int y, int dsx, int dsy, int v ) {
 	        this.numero = numero;
+	        
 	        this.x=x;
 	        this.y=y;
 	        this.dsx=dsx;
@@ -120,7 +121,9 @@ public class NauEspaial extends javax.swing.JFrame {
 	        image = new ImageIcon(Nau.class.getResource("/images/nau.png")).getImage();
 	        Thread t = new Thread(this); 
 	        t.start();
-	        }
+	        
+	    }
+	    
 	    
 	    public int velocitat (){ 
 	        return v;
