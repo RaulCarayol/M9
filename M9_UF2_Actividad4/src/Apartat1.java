@@ -65,6 +65,7 @@ public static void main(String[] args) throws InterruptedException {
 		Runnable caja = new Apartat1(cliente);
 		executor1.execute(caja);
 	}
+	executor1.shutdown();
 
 	//schExService.shutdownNow();
 	System.out.println("Completat");
