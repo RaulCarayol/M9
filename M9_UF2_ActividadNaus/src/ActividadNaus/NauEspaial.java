@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Random;
 import java.awt.*;
 import java.util.*;
@@ -14,12 +15,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class NauEspaial extends javax.swing.JFrame {    
-    static int width;
-    static int height;
 	    public NauEspaial() {
 	        initComponents();
 	        }
-
+	    
 	    @SuppressWarnings("unchecked")
 	    private void initComponents() {
 	        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -49,40 +48,47 @@ public class NauEspaial extends javax.swing.JFrame {
 	        NauEspaial f = new NauEspaial();
 	        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        f.setTitle("Naus Espaials");
-	        f.setContentPane(new PanelNau());
 	        
-	       //Para mirar el maximo de la pantalla
-	        final GraphicsConfiguration config = f.getGraphicsConfiguration();
-	        final int left = Toolkit.getDefaultToolkit().getScreenInsets(config).left;
-	        final int right = Toolkit.getDefaultToolkit().getScreenInsets(config).right;
-	        final int top = Toolkit.getDefaultToolkit().getScreenInsets(config).top;
-	        final int bottom = Toolkit.getDefaultToolkit().getScreenInsets(config).bottom;
+		       //Para mirar el maximo de la pantalla
+	         GraphicsConfiguration config = f.getGraphicsConfiguration();
+	         int left = Toolkit.getDefaultToolkit().getScreenInsets(config).left;
+	         int right = Toolkit.getDefaultToolkit().getScreenInsets(config).right;
+	         int top = Toolkit.getDefaultToolkit().getScreenInsets(config).top;
+	         int bottom = Toolkit.getDefaultToolkit().getScreenInsets(config).bottom;
 
-	        final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	         width = screenSize.width - left - right;
-	         height = screenSize.height - top - bottom;
+	        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	         final int width = screenSize.width - left - right;
+	         final int height = screenSize.height - top - bottom;
+	         
+	        f.setContentPane(new PanelNau(width,height));
 	        
 	        f.setSize(width, height);
 	        f.setVisible(true);
 	        }
 	    }
 	class PanelNau extends JPanel implements Runnable{
-	    private int numNaus=3;    
+	    private int numNaus=2;    
 	    Nau[] nau;
+	    int width,height;
 	    Nave navePrincipal;
-	    public PanelNau(){        
+		 static boolean leftPressed = false;	
+	     static boolean rightPressed = false;
+	     boolean firePressed = false;
+	    public PanelNau(int ancho,int alto){ 
+	    	width=ancho;
+	    	height=alto;
 	        nau = new Nau[numNaus];
-	  
 	        for (int i=0;i<nau.length;i++) {
 	            Random rand = new Random();
-	            int velocitat=(rand.nextInt(3)+5)*1;
+	            int velocitat=(rand.nextInt(3)+5)*2;
 	            int posX=rand.nextInt(100)+30;
 	            int posY=rand.nextInt(100)+30;
-	            int dX=rand.nextInt(3)+1;
-	            int dY=rand.nextInt(3)+1;
-	            nau[i]= new Nau(i,posX,posY,dX,dY,velocitat);
+	            int dX=rand.nextInt(3)+10;
+	            int dY=rand.nextInt(3)+10;
+	            nau[i]= new Nau(i,posX,posY,dX,dY,velocitat,width,height);
 	            }
-	        navePrincipal= new Nave(300);
+	        addKeyListener(new KeyInputHandler());
+	        navePrincipal= new Nave(300,width,height); 
 	        Thread n = new Thread(this);
 	        n.start();   
 	        }
@@ -92,6 +98,8 @@ public class NauEspaial extends javax.swing.JFrame {
 	        while(true) {
 	            try { Thread.sleep(10);} catch(Exception e) {} // espero 0,01 segons
 	            System.out.println("Repintant");
+	            System.out.println(leftPressed);
+	            System.out.println(rightPressed);
 	            repaint();            
 	            }                   
 	        }
@@ -100,13 +108,40 @@ public class NauEspaial extends javax.swing.JFrame {
 	        super.paintComponent(g);
 	        
 	        for(int i=0; i<nau.length;++i) {
-	        
-	        	synchronized (nau[i]) {
 	        		nau[i].pinta(g);
-				} 
+	        		navePrincipal.pinta(g);
 	        	}
-	        	navePrincipal.pinta(g);
+	        	
 	        }
+	    
+		class KeyInputHandler extends KeyAdapter {
+		    
+		    @Override
+		    public void keyPressed(KeyEvent e) {
+		        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+		            leftPressed = true;
+		        }
+		        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+		            rightPressed = true;
+		        }
+		        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+		            firePressed = true;
+		        }
+		    }
+
+		    @Override
+		    public void keyReleased(KeyEvent e) {
+//		        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+//		            leftPressed = false;
+//		        }
+//		        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+//		            rightPressed = false;
+//		        }
+//		        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+//		            firePressed = false;
+//		        }
+		    }
+		}
 	    
 	    }
 

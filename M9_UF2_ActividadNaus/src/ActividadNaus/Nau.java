@@ -10,43 +10,40 @@ public class Nau extends Thread {
     private int numero;
     private int x,y;
     private int dsx,dsy,v;
-    private int tx = 215;
-    private int ty = 190;
+    private int tx;
+    private int ty;
+    private int ancho,alto;
 
     private String img = "/images/nau.jpg";
     private Image image;
 
-    public Nau(int i, int posX, int posY, int dX, int dY, int velocitat) {
+    public Nau(int i, int posX, int posY, int dX, int dY, int velocitat, int ancho,int alto) {
         this.numero = i;
         this.x=x;
         this.y=y;
-        this.dsx=dsx;
-        this.dsy=dsy;
+        this.dsx=dX;
+        this.dsy=dY;
         this.v=velocitat;
+        this.ancho=ancho;
+        this.alto=alto;
         image = new ImageIcon(Nau.class.getResource("/images/nau.png")).getImage();
+        ty = image.getHeight(null);
+        tx = image.getWidth(null);
         Thread t = new Thread(this); 
-        t.start();
-        
+
+        t.start();       
     }
-    
-  
-
-	 {
-		// TODO Auto-generated constructor stub
-	}
-
-
 
 	public int velocitat (){ 
         return v;
         }
     
     public synchronized void moure (){
-        x=x + dsx;
+    	x=x + dsx;
         y=y + dsy;
         // si arriva als marges ...
-        if ( x>=NauEspaial.width - tx || x<= 0) dsx = - dsx;
-        if ( y >= NauEspaial.height - ty || y<=0 ) dsy = - dsy;
+        if ( x>=ancho - tx || x<=0) dsx = - dsx;
+        if ( y >= alto - ty || y<=0 ) dsy = - dsy;
         }
     
     public void pinta (Graphics g) {
