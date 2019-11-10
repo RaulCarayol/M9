@@ -27,9 +27,9 @@ public class Apartat1 implements Runnable{
 	public void run() {
 		System.out.print("Generando el " + cliente.nombre + " con " + cliente.articulos.length + " artículos ");
 		int numArticulos=cliente.articulos.length;
-		for (int i =1 ; i <= numArticulos; i++) {
+		for (int i =0 ; i < numArticulos; i++) {
 			System.out.print(cliente.articulos[i]);
-			if (i != numArticulos) {
+			if (i != numArticulos-1) {
 				System.out.print(", ");
 			} else {
 				System.out.print(")");
@@ -46,7 +46,6 @@ public class Apartat1 implements Runnable{
 			}
 		}
 	}
-
 
 	public static void main(String[] args) throws InterruptedException {
 
@@ -67,6 +66,7 @@ public class Apartat1 implements Runnable{
 			Runnable caja = new Apartat1(cliente);
 			executor1.execute(caja);
 		}
+		
 		executor1.shutdown();
 
 		//schExService.shutdownNow();
