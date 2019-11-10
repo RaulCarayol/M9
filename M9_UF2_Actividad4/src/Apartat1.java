@@ -17,23 +17,23 @@ public class Apartat1 implements Runnable{
 	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		System.out.print("Generando el " + cliente.nombre + " con " + cliente.articulos.length + " artículos ");
+		
 		
 	}
 }
- class Cliente implements Callable<Cliente>{
-	private String nombre;
-	private int[] articulos;
+ class Cliente implements Callable{
+	 String nombre;
+	 int[] articulos;
 	
 	public Cliente(String nombre, int[] articulos){
 		this.nombre= nombre;
 		this.articulos = articulos;
 	}
 	
-	@Override
-	public Cliente call() {
+	public void call() {
 
-		return new Cliente(nombre, articulos);
+		
 	}
 	
  
