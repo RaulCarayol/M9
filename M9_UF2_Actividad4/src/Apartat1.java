@@ -18,8 +18,24 @@ public class Apartat1 implements Runnable{
 	@Override
 	public void run() {
 		System.out.print("Generando el " + cliente.nombre + " con " + cliente.articulos.length + " artículos ");
-		
-		
+		int numArticulos=cliente.articulos.length;
+		for (int i =1 ; i <= numArticulos; i++) {
+			System.out.print(cliente.articulos[i]);
+			if (i != numArticulos) {
+				System.out.print(", ");
+			} else {
+				System.out.print(")");
+			}
+		}
+		System.out.println();
+		System.out.println(cliente.nombre + " pasando por caja...");
+		for (int i = 0; i < cliente.articulos.length; i++) {
+				try {
+					Thread.sleep(cliente.articulos[i] * 1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	}
 }
  class Cliente{
@@ -33,8 +49,8 @@ public class Apartat1 implements Runnable{
 	
 
 	
- 
-public static void main(String[] args) throws InterruptedException {
+ }
+public void main(String[] args) throws InterruptedException {
 	
 	//final ScheduledExecutorService schExService = Executors.newScheduledThreadPool(4);
 	
@@ -68,6 +84,7 @@ public static void main(String[] args) throws InterruptedException {
 	System.out.println("Completat");
 	}
 }
+
 
 
 
