@@ -22,7 +22,7 @@ public class Apartat1 implements Runnable{
 		
 	}
 }
- class Cliente implements Callable{
+ class Cliente{
 	 String nombre;
 	 int[] articulos;
 	
@@ -31,10 +31,7 @@ public class Apartat1 implements Runnable{
 		this.articulos = articulos;
 	}
 	
-	public void call() {
 
-		
-	}
 	
  
 public static void main(String[] args) throws InterruptedException {
