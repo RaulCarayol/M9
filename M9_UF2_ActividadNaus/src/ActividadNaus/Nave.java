@@ -12,7 +12,7 @@ import javax.swing.ImageIcon;
 
 public class Nave implements Runnable{
 		private int x,y;
-		private int velocidad;
+		private int velocidad,dx,dy;
 	    private String img = "/images/nau.jpg";
 	    private Image image;
 	    private int ancho,alto;
@@ -25,20 +25,37 @@ public class Nave implements Runnable{
 			alto =height;
 			x=width/2;
 			y=height - image.getHeight(null)-40;
-			
-			
+			dy=0;
+			dx=0;
 		}
 		
 	    public void moure (){
-	    	//&& ((x < (ancho - image.getWidth(null))) && (x > 0) )
-//	    	if(PanelNau.rightPressed ){
-//	        	x=x+velocidad;
-//	        }else if(PanelNau.leftPressed ){
-//	        	  x= x-velocidad;
-//	        }
+	    	System.out.println(dx);
+	    	if(((x+dx*velocidad) > (-image.getWidth(null)/8)) && ((x+dx*velocidad) < (ancho - image.getWidth(null)*7/8))){
+		    	
+	    		x=x+dx*velocidad;}
+	    	if(((y+dy*velocidad) > -image.getHeight(null)/4) &&((y+dy*velocidad) < (alto - image.getHeight(null)))){
+	    		y=y+dy*velocidad;
+	    	}
 	    }
 	    
-	    public void moverIzquierda (){
+	    public int getDx() {
+			return dx;
+		}
+
+		public void setDx(int dx) {
+			this.dx = dx;
+		}
+
+		public int getDy() {
+			return dy;
+		}
+
+		public void setDy(int dy) {
+			this.dy = dy;
+		}
+
+		public void moverIzquierda (){
 	    	if((x-velocidad) > -image.getWidth(null)/8){
 	    	x=x-velocidad;}
 	    }

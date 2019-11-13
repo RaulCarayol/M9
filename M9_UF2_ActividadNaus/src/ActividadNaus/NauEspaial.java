@@ -87,9 +87,11 @@ public class NauEspaial extends javax.swing.JFrame {
 	            }
 	        addKeyListener(new KeyInputHandler());
 			setFocusable(true);
-	        navePrincipal= new Nave(60,width,height); 
+	        navePrincipal= new Nave(11,width,height); 
+	        Thread hiloNavePrincipal = new Thread(navePrincipal);
+	        hiloNavePrincipal.start();
 	        Thread n = new Thread(this);
-	        n.start();   
+	        n.start();
 	        }
 
 	    public void run() {
@@ -137,19 +139,20 @@ public class NauEspaial extends javax.swing.JFrame {
 		    @Override
 		    public void keyPressed(KeyEvent e) {
 		    	if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-						navePrincipal.moverIzquierda();
+						//navePrincipal.moverIzquierda();
+		    		navePrincipal.setDx(-10);
 				}
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-					
-					navePrincipal.moverDerecha();
+					navePrincipal.setDx(+10);
+					//navePrincipal.moverDerecha();
 				}
 				if (e.getKeyCode() == KeyEvent.VK_UP) {
-				
-					navePrincipal.moverArriba();
+					navePrincipal.setDy(-10);
+					//navePrincipal.moverArriba();
 				}
 				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-		
-					navePrincipal.moverAbajo();
+					navePrincipal.setDy(+10);
+					//navePrincipal.moverAbajo();
 				}
 				if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 					Disparo disparo=new Disparo(40, width,height,navePrincipal.getX() + (navePrincipal.getImage().getWidth(null) /2), navePrincipal.getY());
@@ -160,15 +163,21 @@ public class NauEspaial extends javax.swing.JFrame {
 
 		    @Override
 		    public void keyReleased(KeyEvent e) {
-//		        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-//		            leftPressed = false;
-//		        }
-//		        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-//		            rightPressed = false;
-//		        }
-//		        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-//		            firePressed = false;
-//		        }
+		        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+		        	navePrincipal.setDx(0);
+		        }
+		        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+		        	navePrincipal.setDx(0);
+		        }
+		        if (e.getKeyCode() == KeyEvent.VK_UP) {
+		        	navePrincipal.setDy(0);
+		        }
+		        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+		        	navePrincipal.setDy(0);
+		        }
+		        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+		           
+		        }
 		    }
 		}
 	    

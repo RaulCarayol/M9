@@ -50,6 +50,10 @@ public class Nau extends Thread {
         Graphics2D g2d = (Graphics2D)g;
         g2d.drawImage(this.image, x, y, null);
         }
+//    	public void mirarColision(){
+//    		if ( instanceof Disparo) {
+//    		}
+//    	}
     
 
     public void run() {

@@ -40,6 +40,7 @@ public class Disparo extends Thread{
 			public void setDestruido(boolean destruido) {
 				this.destruido = destruido;
 			}
+			
 
 			@Override
 			public void run() {
