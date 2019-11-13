@@ -31,12 +31,35 @@ public class Nave implements Runnable{
 		
 	    public void moure (){
 	    	//&& ((x < (ancho - image.getWidth(null))) && (x > 0) )
-	    	if(PanelNau.rightPressed ){
-	        	x=x+velocidad;
-	        }else if(PanelNau.leftPressed ){
-	        	  x= x-velocidad;
-	        }
+//	    	if(PanelNau.rightPressed ){
+//	        	x=x+velocidad;
+//	        }else if(PanelNau.leftPressed ){
+//	        	  x= x-velocidad;
+//	        }
 	    }
+	    
+	    public void moverIzquierda (){
+	    	if((x-velocidad) > -image.getWidth(null)/8){
+	    	x=x-velocidad;}
+	    }
+	    public void moverDerecha (){
+	    	if((x+velocidad) < ancho - image.getWidth(null)*7/8){
+	    	x=x+velocidad;}
+	    }
+	    public void moverArriba (){
+	    	if((y-velocidad) > -image.getHeight(null)/4){
+	    	y=y-velocidad;}
+	    }
+	    public void moverAbajo (){
+	    	if((y+velocidad) < (alto - image.getHeight(null))){
+	    	y=y+velocidad;}
+	    }
+//	    public boolean comprovacionDentro (int movimiento){
+//	    	//1-derecha,1-izquierda,3,
+//	    	boolean dentro=true;
+//	    	if()
+//	    	return dentro;
+//	    }
 
 		@Override
 		public void run() {

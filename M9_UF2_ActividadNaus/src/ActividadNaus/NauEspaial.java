@@ -71,9 +71,7 @@ public class NauEspaial extends javax.swing.JFrame {
 	    Nau[] nau;
 	    int width,height;
 	    Nave navePrincipal;
-		 static boolean leftPressed = false;	
-	     static boolean rightPressed = false;
-	     boolean firePressed = false;
+	    Vector<Disparo> disparos= new Vector<Disparo>();
 	    public PanelNau(int ancho,int alto){ 
 	    	width=ancho;
 	    	height=alto;
@@ -88,7 +86,8 @@ public class NauEspaial extends javax.swing.JFrame {
 	            nau[i]= new Nau(i,posX,posY,dX,dY,velocitat,width,height);
 	            }
 	        addKeyListener(new KeyInputHandler());
-	        navePrincipal= new Nave(300,width,height); 
+			setFocusable(true);
+	        navePrincipal= new Nave(60,width,height); 
 	        Thread n = new Thread(this);
 	        n.start();   
 	        }
@@ -98,9 +97,9 @@ public class NauEspaial extends javax.swing.JFrame {
 	        while(true) {
 	            try { Thread.sleep(10);} catch(Exception e) {} // espero 0,01 segons
 	            System.out.println("Repintant");
-	            System.out.println(leftPressed);
-	            System.out.println(rightPressed);
-	            repaint();            
+	            repaint();
+	            mirarColisiones();
+	            destruirDisparos();
 	            }                   
 	        }
 
@@ -111,21 +110,52 @@ public class NauEspaial extends javax.swing.JFrame {
 	        		nau[i].pinta(g);
 	        		navePrincipal.pinta(g);
 	        	}
-	        	
+	        if(!disparos.isEmpty()){
+				for (int j = 0; j < disparos.size(); j++) {
+					disparos.elementAt(j).pinta(g);
+				}
+				} 	
 	        }
+	    public void destruirDisparos(){
+	    	 if(!disparos.isEmpty()){
+					for (int j = 0; j < disparos.size(); j++) {
+						if(disparos.elementAt(j).getDestruido()){
+							disparos.elementAt(j).interrupt();
+							disparos.remove(j);
+							System.gc();
+							System.out.println("Destruido disparo");
+						}
+					}
+					} 	
+	    }
 	    
-		class KeyInputHandler extends KeyAdapter {
+	    public void mirarColisiones(){
+	    	
+	    }
+	    
+	    class KeyInputHandler extends KeyAdapter {
 		    @Override
 		    public void keyPressed(KeyEvent e) {
-		        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-		            leftPressed = true;
-		        }
-		        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-		            rightPressed = true;
-		        }
-		        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-		            firePressed = true;
-		        }
+		    	if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+						navePrincipal.moverIzquierda();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+					
+					navePrincipal.moverDerecha();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+				
+					navePrincipal.moverArriba();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+		
+					navePrincipal.moverAbajo();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+					Disparo disparo=new Disparo(40, width,height,navePrincipal.getX() + (navePrincipal.getImage().getWidth(null) /2), navePrincipal.getY());
+					disparos.add(disparo);
+					disparo.start();
+				}
 		    }
 
 		    @Override
