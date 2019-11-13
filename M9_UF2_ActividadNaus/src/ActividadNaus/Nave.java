@@ -3,6 +3,7 @@ package ActividadNaus;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.concurrent.*;
@@ -148,6 +149,10 @@ public class Nave implements Runnable{
 		public void setAlto(int alto) {
 			this.alto = alto;
 		}
+		
+	    public Rectangle getBounds() {
+	        return new Rectangle(x, y, image.getWidth(null),image.getHeight(null));
+	    }
 	    
 	    
 

@@ -3,6 +3,7 @@ package ActividadNaus;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
@@ -63,9 +64,111 @@ public class Nau extends Thread {
             moure();
             }
         }
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, image.getWidth(null),image.getHeight(null));
+    }
+
+	public int getNumero() {
+		return numero;
+	}
+
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getDsx() {
+		return dsx;
+	}
+
+	public void setDsx(int dsx) {
+		this.dsx = dsx;
+	}
+
+	public int getDsy() {
+		return dsy;
+	}
+
+	public void setDsy(int dsy) {
+		this.dsy = dsy;
+	}
+
+	public int getV() {
+		return v;
+	}
+
+	public void setV(int v) {
+		this.v = v;
+	}
+
+	public int getTx() {
+		return tx;
+	}
+
+	public void setTx(int tx) {
+		this.tx = tx;
+	}
+
+	public int getTy() {
+		return ty;
+	}
+
+	public void setTy(int ty) {
+		this.ty = ty;
+	}
+
+	public int getAncho() {
+		return ancho;
+	}
+
+	public void setAncho(int ancho) {
+		this.ancho = ancho;
+	}
+
+	public int getAlto() {
+		return alto;
+	}
+
+	public void setAlto(int alto) {
+		this.alto = alto;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
 
 
-
+    
+    
+    
+    
     }
 
 

@@ -105,9 +105,9 @@ public class NauEspaial extends javax.swing.JFrame {
 	            }                   
 	        }
 
-	    public void paintComponent(Graphics g) {
+
+		public void paintComponent(Graphics g) {
 	        super.paintComponent(g);
-	        
 	        for(int i=0; i<nau.length;++i) {
 	        		nau[i].pinta(g);
 	        		navePrincipal.pinta(g);
@@ -130,10 +130,57 @@ public class NauEspaial extends javax.swing.JFrame {
 					}
 					} 	
 	    }
-	    
-	    public void mirarColisiones(){
-	    	
+
+	    private void drawGameOver(Graphics g) {
+
+	        String msg = "Game Over";
+	        Font small = new Font("Helvetica", Font.BOLD, 140);
+	        FontMetrics fm = getFontMetrics(small);
+
+	        g.setColor(Color.BLACK);
+	        g.setFont(small);
+	        g.drawString(msg, (width - fm.stringWidth(msg)) / 2,
+	                height / 2);
 	    }
+	    
+	    	public void mirarColisiones() {
+
+	            Rectangle r3 = navePrincipal.getBounds();
+
+	            for (Nau alien : nau) {
+	                
+	                Rectangle r2 = alien.getBounds();
+
+	                if (r3.intersects(r2)) {
+	                	alien.setDsx(0);
+	                	alien.setDsy(0);
+	                	alien.interrupt();
+	                	while(true){
+	                	drawGameOver(this.getGraphics());
+	                	}
+	                    //System.out.println("Fin del Juego");
+	                }
+	            }
+
+	            for (Disparo m : disparos) {
+
+	                Rectangle r1 = m.getBounds();
+
+	                for (Nau alien : nau) {
+
+	                    Rectangle r2 = alien.getBounds();
+
+	                    if (r1.intersects(r2)) {
+	                        
+	                        m.setDestruido(true);
+	                    	alien.setDsx(0);
+		                	alien.setDsy(0);
+	                        alien.setImage(new ImageIcon(Nau.class.getResource("/images/explosion1.png")).getImage());
+	                        
+	                    }
+	                }
+	            }
+	        }
 	    
 	    class KeyInputHandler extends KeyAdapter {
 		    @Override
