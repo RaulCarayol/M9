@@ -30,11 +30,9 @@ public class Nave implements Runnable{
 		}
 		
 	    public void moure (){
-	    	System.out.println(dx);
-	    	if(((x+dx*velocidad) > (-image.getWidth(null)/8)) && ((x+dx*velocidad) < (ancho - image.getWidth(null)*7/8))){
-		    	
+	    	if(((x+dx*velocidad) > (-35)) && ((x+dx*velocidad) < (ancho-50))){
 	    		x=x+dx*velocidad;}
-	    	if(((y+dy*velocidad) > -image.getHeight(null)/4) &&((y+dy*velocidad) < (alto - image.getHeight(null)))){
+	    	if(((y+dy*velocidad) > -image.getHeight(null)*2/8) &&((y+dy*velocidad) < (alto - image.getHeight(null)))){
 	    		y=y+dy*velocidad;
 	    	}
 	    }
