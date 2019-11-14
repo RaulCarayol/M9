@@ -14,7 +14,7 @@ public class Nau extends Thread {
     private int tx;
     private int ty;
     private int ancho,alto;
-
+    private boolean destruido;
     private String img = "/images/nau.jpg";
     private Image image;
 
@@ -27,11 +27,11 @@ public class Nau extends Thread {
         this.v=velocitat;
         this.ancho=ancho;
         this.alto=alto;
-        image = new ImageIcon(Nau.class.getResource("/images/nau.png")).getImage();
+        image = new ImageIcon(Nau.class.getResource("/images/nauvisual2.png")).getImage();
         ty = image.getHeight(null);
         tx = image.getWidth(null);
         Thread t = new Thread(this); 
-
+        destruido=false;
         t.start();       
     }
 
@@ -164,7 +164,12 @@ public class Nau extends Thread {
 		this.image = image;
 	}
 
-
+	public void setDestruido(boolean a){
+		destruido=a;
+	}
+	public boolean getDestruido(){
+		return destruido;
+	}
     
     
     

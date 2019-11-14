@@ -58,6 +58,22 @@ public class Disparo extends Thread{
 		        g2d.drawImage(image, x, y, null);
 		        
 		    }
+		    public void colision(Graphics g) throws InterruptedException{
+		    	velocidad=0;
+		    	explosion(g);
+		    	//Thread.sleep(100);
+		    	destruido=true;
+		    }
+		    public void explosion(Graphics g) throws InterruptedException{
+		    	int bucle=1;
+		    	image =(new ImageIcon(Nau.class.getResource("/images/explosion/explosion.png")).getImage());
+		    	pinta(g);
+		    	for (int i = 2; i < 41; i++) {
+		    		for(int n=0; n< 600000; n++ ){}
+		    		image =(new ImageIcon(Nau.class.getResource("/images/explosion/explosion ("+i+").png")).getImage());
+			    	pinta(g);
+				}
+		    }
 
 			public int getX() {
 				return x;

@@ -11,23 +11,25 @@ import java.util.concurrent.*;
 import javax.swing.ImageIcon;
 
 
-public class Nave implements Runnable{
+public class Nave extends Thread{
 		private int x,y;
 		private int velocidad,dx,dy;
 	    private String img = "/images/nau.jpg";
 	    private Image image;
 	    private int ancho,alto;
+	   
 
 	    
 		public Nave(int velocidad, int width,int height){
 			this.velocidad=velocidad;
-			image = new ImageIcon(Nau.class.getResource("/images/nau.png")).getImage();
+			image = new ImageIcon(Nau.class.getResource("/images/nauvisual1.png")).getImage();
 			ancho = width;
 			alto =height;
 			x=width/2;
 			y=height - image.getHeight(null)-40;
 			dy=0;
 			dx=0;
+			
 		}
 		
 	    public void moure (){
