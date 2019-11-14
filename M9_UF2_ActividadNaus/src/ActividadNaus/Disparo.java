@@ -18,7 +18,11 @@
 	
 		public Disparo(int velocidad, int width,int height,int x, int y, boolean enemigo){
 			this.velocidad=velocidad;
+			if(enemigo){
+				image = new ImageIcon(Nau.class.getResource("/images/disparo2.png")).getImage();
+			} else {
 			image = new ImageIcon(Nau.class.getResource("/images/disparo.png")).getImage();
+			}
 			ancho = width;
 			alto =height;
 			this.x=x;
@@ -50,7 +54,6 @@
 	
 		@Override
 		public void run() {
-			// TODO Auto-generated method stub
 			while (true) { 
 				try { Thread.sleep(100); } catch (Exception e) {}
 				if(enemigo){
@@ -75,10 +78,12 @@
 			int bucle=1;
 			image =(new ImageIcon(Nau.class.getResource("/images/explosion/explosion.png")).getImage());
 			pinta(g);
-			for (int i = 2; i < 41; i++) {
-				for(int n=0; n< 600; n++ ){}
-				image =(new ImageIcon(Nau.class.getResource("/images/explosion/explosion ("+i+").png")).getImage());
-				pinta(g);
+			for (int m = 0; m < 3; m++) {
+				for (int i = 2; i < 61; i++) {
+					//for(int n=0; n< 60000; n++ ){}
+					image =(new ImageIcon(Nau.class.getResource("/images/explosion/explosion ("+i+").png")).getImage());
+					pinta(g);
+				}
 			}
 		}
 	

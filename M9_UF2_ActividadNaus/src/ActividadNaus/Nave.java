@@ -29,13 +29,14 @@ public class Nave extends Thread{
 			y=height - image.getHeight(null)-40;
 			dy=0;
 			dx=0;
-			
+			 Thread t = new Thread(this); 
+			 t.start();
 		}
 		
 	    public void moure (){
-	    	if(((x+dx*velocidad) > (-35)) && ((x+dx*velocidad) < (ancho-50))){
+	    	if(((x+dx*velocidad) > (0)) && ((x+dx*velocidad) < (ancho-image.getWidth(null)))){
 	    		x=x+dx*velocidad;}
-	    	if(((y+dy*velocidad) > -image.getHeight(null)*2/8) &&((y+dy*velocidad) < (alto - image.getHeight(null)))){
+	    	if(((y+dy*velocidad) > 0) &&((y+dy*velocidad) < alto)){
 	    		y=y+dy*velocidad;
 	    	}
 	    }

@@ -178,7 +178,7 @@ public class NauEspaial extends javax.swing.JFrame {
 	                height / 2);
 	    }
 	    
-	    	public void mirarColisiones() throws InterruptedException{
+	    public synchronized void mirarColisiones() throws InterruptedException{
 	            Rectangle r3 = navePrincipal.getBounds();
 	            
 	            for (Nau alien : nau) {
@@ -192,15 +192,10 @@ public class NauEspaial extends javax.swing.JFrame {
 	            }
 
 	            for (Disparo m : disparos) {
-
 	                Rectangle r1 = m.getBounds();
-
 	                for (Nau alien : nau) {
-
 	                    Rectangle r2 = alien.getBounds();
-
 	                    if (r1.intersects(r2)) {
-
 	                    	alien.setDsx(0);
 		                	alien.setDsy(0);
 		                	alien.setDestruido(true);
@@ -209,22 +204,51 @@ public class NauEspaial extends javax.swing.JFrame {
 	                    }
 	                }
 	            }
+	            
+	            for (int i = 0; i < nau.size(); i++) {
+	            if(!nau.elementAt(i).disparos.isEmpty()){
+	            for (Disparo d : nau.elementAt(i).disparos) {
+	                Rectangle r5 = d.getBounds();
+	                Rectangle r4 = navePrincipal.getBounds();
+	                    if (r5.intersects(r4)) {
+	                    	finJuego=true;
+		                	//d.setDestruido(true);
+	                        d.colision(getGraphics());
+	                    }   
+	            	}
+	            }}
 	        }
 	    
 	    class KeyInputHandler extends KeyAdapter {
 		    @Override
 		    public void keyPressed(KeyEvent e) {
+		    	if (e.getKeyCode() == KeyEvent.VK_LEFT  && e.getKeyCode() == KeyEvent.VK_UP) {
+		    		navePrincipal.setDx(-3);
+		    		navePrincipal.setDy(-3);
+				}
+		    	if (e.getKeyCode() == KeyEvent.VK_RIGHT  && e.getKeyCode() == KeyEvent.VK_UP) {
+		    		navePrincipal.setDx(+3);
+		    		navePrincipal.setDy(-3);
+				}
+		    	if (e.getKeyCode() == KeyEvent.VK_LEFT  && e.getKeyCode() == KeyEvent.VK_DOWN) {
+		    		navePrincipal.setDx(-3);
+		    		navePrincipal.setDy(+3);
+				}
+		    	if (e.getKeyCode() == KeyEvent.VK_LEFT  && e.getKeyCode() == KeyEvent.VK_DOWN) {
+		    		navePrincipal.setDx(+3);
+		    		navePrincipal.setDy(+3);
+				}
 		    	if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-		    		navePrincipal.setDx(-10);
+		    		navePrincipal.setDx(-3);
 				}
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-					navePrincipal.setDx(+10);
+					navePrincipal.setDx(+3);
 				}
 				if (e.getKeyCode() == KeyEvent.VK_UP) {
-					navePrincipal.setDy(-10);
+					navePrincipal.setDy(-3);
 				}
 				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-					navePrincipal.setDy(+10);
+					navePrincipal.setDy(+3);
 				}
 				if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 					Disparo disparo=new Disparo(40, width,height,navePrincipal.getX() + (navePrincipal.getImage().getWidth(null) /2), navePrincipal.getY(),false);
@@ -233,7 +257,29 @@ public class NauEspaial extends javax.swing.JFrame {
 				}
 				if(e.getKeyCode() == KeyEvent.VK_ENTER){
 					if(finJuego || numNaus==0){
-						System.exit(1);
+						
+						NauEspaial f = new NauEspaial();
+				        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				        f.setTitle("Naus Espaials");
+				        
+					       //Para mirar el maximo de la pantalla
+				         GraphicsConfiguration config = f.getGraphicsConfiguration();
+				         int left = Toolkit.getDefaultToolkit().getScreenInsets(config).left;
+				         int right = Toolkit.getDefaultToolkit().getScreenInsets(config).right;
+				         int top = Toolkit.getDefaultToolkit().getScreenInsets(config).top;
+				         int bottom = Toolkit.getDefaultToolkit().getScreenInsets(config).bottom;
+
+				        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+				         final int width = screenSize.width - left - right;
+				         final int height = screenSize.height - top - bottom;
+
+				        f.setContentPane(new PanelNau(width,height));
+				        f.setSize(width, height);
+				        f.setVisible(true);
+					}
+				}if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+					if(finJuego || numNaus==0){
+						System.exit(0);
 					}
 				}
 		    }

@@ -68,20 +68,31 @@ public class Nau extends Thread {
 
     public void run() {
     	int i=0;
-    	Vector<Disparo> disparos = new Vector<Disparo>();
         while (true) { 
             //System.out.println("Movent nau numero " + this.numero);
             try { Thread.sleep(this.v); } catch (Exception e) {}
             moure();
-
+           destruirDisparos();
             if(i==1000){
+            	
             	disparar();
             	i=0;
+            	
             }else{i++;}
             
             }
         }
-    
+    public void destruirDisparos(){
+				for (int j = 0; j < disparos.size(); j++) {
+					if(disparos.elementAt(j).getDestruido()){
+						disparos.elementAt(j).interrupt();
+						disparos.remove(j);
+						System.gc();
+						System.out.println("Destruido disparo enemigo");
+					}
+				}	
+   }
+   
     public Rectangle getBounds() {
         return new Rectangle(x, y, image.getWidth(null),image.getHeight(null));
     }
