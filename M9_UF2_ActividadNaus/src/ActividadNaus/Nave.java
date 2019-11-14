@@ -84,8 +84,8 @@ public class Nave extends Thread{
 			// TODO Auto-generated method stub
 
 	        while (true) { 
-	            System.out.println("Movent Nave principal ");
-	            try { Thread.sleep(100); } catch (Exception e) {}
+	            //System.out.println("Movent Nave principal ");
+	            try { Thread.sleep(60); } catch (Exception e) {}
 	            moure();
 	            }
 		}

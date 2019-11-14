@@ -61,13 +61,12 @@ public class NauEspaial extends javax.swing.JFrame {
 	         final int height = screenSize.height - top - bottom;
 	         
 	        f.setContentPane(new PanelNau(width,height));
-	        
 	        f.setSize(width, height);
 	        f.setVisible(true);
 	        }
 	    }
 	class PanelNau extends JPanel implements Runnable{
-	    private int numNaus=2;    
+	    private int numNaus=3;    
 	    Vector <Nau> nau = new Vector<Nau>(numNaus);
 	    int width,height;
 	    Nave navePrincipal;
@@ -88,8 +87,8 @@ public class NauEspaial extends javax.swing.JFrame {
 	            int velocitat =(int) (((Math.random() * ((3 - 1) + 1)) + 1));
 	            int posX =(int) (((Math.random() * ((100 - 10) + 1)) + 10));
 	            int posY =(int) (((Math.random() * ((100 - 10) + 1)) + 10));
-	            int dX =(int) (((Math.random() * ((2 - 1) + 1)) + 1));
-	            int dY =(int) (((Math.random() * ((2 - 1) + 1)) + 1));
+	            int dX =(int) (((Math.random() * ((1 - 1) + 1)) + 1));
+	            int dY =(int) (((Math.random() * ((1 - 1) + 1)) + 1));
 
 	            nau.add( new Nau(i,posX,posY,dX,dY,velocitat,width,height));
 	            }
@@ -107,18 +106,20 @@ public class NauEspaial extends javax.swing.JFrame {
 	        while(true) {
 	            try { Thread.sleep(10);} catch(Exception e) {} // espero 0,01 segons
 	            	if(!finJuego && numNaus != 0){
-	            		System.out.println("Repintant");
+	            		//System.out.println("Repintant");
 	            		repaint();
 					     try {
 							mirarColisiones();
 						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 	            		destruirDisparos();
 	            		destruirNaves();
 	            	}else{
-	            		drawGameOver(this.getGraphics());
+	            		if(numNaus == 0){
+	            		drawString(this.getGraphics(),"Has Ganado");
+	            		}else{
+	            		drawString(this.getGraphics(),"Game Over");}
 	            		Thread.interrupted();
 	            		for (int i = 0; i < nau.size(); i++) {
 							nau.elementAt(i).interrupt();
@@ -154,6 +155,7 @@ public class NauEspaial extends javax.swing.JFrame {
 					}
 					} 	
 	    }
+	    
 	    public void destruirNaves(){
 					for (int j = 0; j < nau.size(); j++) {
 						if(nau.elementAt(j).getDestruido()){
@@ -163,17 +165,16 @@ public class NauEspaial extends javax.swing.JFrame {
 							System.out.println("Destruido nave");
 						}
 					}
-					} 	
+				} 	
 
-	    private void drawGameOver(Graphics g) {
+	    private void drawString(Graphics g,String str) {
 
-	        String msg = "Game Over";
 	        Font small = new Font("Helvetica", Font.BOLD, 140);
 	        FontMetrics fm = getFontMetrics(small);
 
 	        g.setColor(Color.WHITE);
 	        g.setFont(small);
-	        g.drawString(msg, (width - fm.stringWidth(msg)) / 2,
+	        g.drawString(str, (width - fm.stringWidth(str)) / 2,
 	                height / 2);
 	    }
 	    
@@ -199,16 +200,12 @@ public class NauEspaial extends javax.swing.JFrame {
 	                    Rectangle r2 = alien.getBounds();
 
 	                    if (r1.intersects(r2)) {
-	                        
-	                        
+
 	                    	alien.setDsx(0);
 		                	alien.setDsy(0);
 		                	alien.setDestruido(true);
-	                        //m.setImage(new ImageIcon(Nau.class.getResource("/images/explosion1.png")).getImage());
 	                        m.colision(getGraphics());
 	                        numNaus--;
-	                        //alien.setImage(null);
-	                     
 	                    }
 	                }
 	            }
@@ -218,25 +215,26 @@ public class NauEspaial extends javax.swing.JFrame {
 		    @Override
 		    public void keyPressed(KeyEvent e) {
 		    	if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-						//navePrincipal.moverIzquierda();
 		    		navePrincipal.setDx(-10);
 				}
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 					navePrincipal.setDx(+10);
-					//navePrincipal.moverDerecha();
 				}
 				if (e.getKeyCode() == KeyEvent.VK_UP) {
 					navePrincipal.setDy(-10);
-					//navePrincipal.moverArriba();
 				}
 				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 					navePrincipal.setDy(+10);
-					//navePrincipal.moverAbajo();
 				}
 				if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-					Disparo disparo=new Disparo(40, width,height,navePrincipal.getX() + (navePrincipal.getImage().getWidth(null) /2), navePrincipal.getY());
+					Disparo disparo=new Disparo(40, width,height,navePrincipal.getX() + (navePrincipal.getImage().getWidth(null) /2), navePrincipal.getY(),false);
 					disparos.add(disparo);
 					disparo.start();	
+				}
+				if(e.getKeyCode() == KeyEvent.VK_ENTER){
+					if(finJuego || numNaus==0){
+						System.exit(1);
+					}
 				}
 		    }
 

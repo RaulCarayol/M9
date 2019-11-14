@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 
@@ -17,7 +18,7 @@ public class Nau extends Thread {
     private boolean destruido;
     private String img = "/images/nau.jpg";
     private Image image;
-
+    Vector<Disparo> disparos = new Vector<Disparo>();
     public Nau(int i, int posX, int posY, int dX, int dY, int velocitat, int ancho,int alto) {
         this.numero = i;
         this.x=x;
@@ -50,20 +51,37 @@ public class Nau extends Thread {
     public void pinta (Graphics g) {
         Graphics2D g2d = (Graphics2D)g;
         g2d.drawImage(this.image, x, y, null);
+        
+        if(!disparos.isEmpty()){
+        	System.out.println("pintando disparos enemigos");
+			for (int j = 0; j < disparos.size(); j++) {
+				disparos.elementAt(j).pinta(g);
+			}
+		} 	
         }
-//    	public void mirarColision(){
-//    		if ( instanceof Disparo) {
-//    		}
-//    	}
-    
+
+    public void disparar () {
+    	Disparo disparo = new Disparo(40, ancho,alto,x + (image.getWidth(null) /2), y,true);
+    	disparos.add(disparo);
+    	disparo.start();
+        }
 
     public void run() {
+    	int i=0;
+    	Vector<Disparo> disparos = new Vector<Disparo>();
         while (true) { 
-            System.out.println("Movent nau numero " + this.numero);
+            //System.out.println("Movent nau numero " + this.numero);
             try { Thread.sleep(this.v); } catch (Exception e) {}
             moure();
+
+            if(i==1000){
+            	disparar();
+            	i=0;
+            }else{i++;}
+            
             }
         }
+    
     public Rectangle getBounds() {
         return new Rectangle(x, y, image.getWidth(null),image.getHeight(null));
     }
