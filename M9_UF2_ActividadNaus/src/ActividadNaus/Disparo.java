@@ -14,7 +14,7 @@
 		private String img = "/images/disparo.jpg";
 		private Image image;
 		private int ancho,alto;
-		private boolean destruido,enemigo;
+		private boolean destruido,enemigo,execute;
 	
 		public Disparo(int velocidad, int width,int height,int x, int y, boolean enemigo){
 			this.velocidad=velocidad;
@@ -30,7 +30,7 @@
 			destruido=false;
 			this.enemigo=enemigo;
 		}
-	
+
 		public void moverAbajo (){
 			y=y+velocidad;
 			if(y>alto-10){
@@ -54,7 +54,8 @@
 	
 		@Override
 		public void run() {
-			while (true) { 
+			execute=true;
+	        while (execute) { 
 				try { Thread.sleep(100); } catch (Exception e) {}
 				if(enemigo){
 					moverAbajo();
@@ -63,6 +64,14 @@
 				}
 			}
 		}
+		public boolean isExecute() {
+			return execute;
+		}
+
+		public void setExecute(boolean execute) {
+			this.execute = execute;
+		}
+
 		public void pinta (Graphics g) {
 			Graphics2D g2d = (Graphics2D)g;
 			g2d.drawImage(image, x, y, null);
