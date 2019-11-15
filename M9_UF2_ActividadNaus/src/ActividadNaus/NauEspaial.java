@@ -91,7 +91,6 @@ class PanelNau extends JPanel implements Runnable{
 		//Thread hiloNavePrincipal = new Thread(navePrincipal);
 		navePrincipal.start();
 		Thread n = new Thread(this);
-		n.setPriority(10);
 		n.start();
 	}
 
@@ -229,7 +228,7 @@ class PanelNau extends JPanel implements Runnable{
 			}
 		}
 
-		public void comprobarDisparos() throws InterruptedException{
+		public synchronized  void comprobarDisparos() throws InterruptedException{
 			for (Disparo m : disparos){
 				Rectangle r1 = m.getBounds();
 				for (Nau alien : nau) {
@@ -245,7 +244,7 @@ class PanelNau extends JPanel implements Runnable{
 			}
 		}
 
-		public boolean comprobarColosionEnemigos(){
+		public synchronized  void comprobarColosionEnemigos(){
 			Rectangle r3 = navePrincipal.getBounds();
 			for (Nau nauEnemiga : nau) {
 				Rectangle r2 = nauEnemiga.getBounds();
@@ -256,10 +255,9 @@ class PanelNau extends JPanel implements Runnable{
 					finJuego=true;
 				}
 			}
-			return true;
 		}
 
-		public boolean comprobarDisparosEnemigos() throws InterruptedException{
+		public synchronized  void comprobarDisparosEnemigos() throws InterruptedException{
 			for (int i = 0; i < nau.size(); i++) {
 				if(!nau.elementAt(i).disparos.isEmpty()){
 					for (Disparo d : nau.elementAt(i).disparos) {
@@ -273,7 +271,6 @@ class PanelNau extends JPanel implements Runnable{
 					}
 				}
 			}
-			return true;
 		}
 
 	}
@@ -313,7 +310,6 @@ class PanelNau extends JPanel implements Runnable{
 			}
 			if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 				if(disparos.size() < 6 ){
-
 					Disparo disparo=new Disparo(40, width,height,navePrincipal.getX() + (navePrincipal.getImage().getWidth(null) /2), navePrincipal.getY(),false);
 					disparos.add(disparo);
 					disparo.start();
