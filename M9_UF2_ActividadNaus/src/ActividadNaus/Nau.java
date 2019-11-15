@@ -49,7 +49,6 @@ public class Nau extends Thread  {
 		// si arriva als marges ...
 		if ( x>=ancho - tx || x<=0) dsx = - dsx;
 		if ( y >= alto - ty || y<=0 ) dsy = - dsy;
-		System.out.println("nave " + x +" "+y);
 	}
 
 	public void pinta (Graphics g) {
@@ -75,7 +74,6 @@ public class Nau extends Thread  {
 		Random rand = new Random();
 		int timerDisp=(rand.nextInt(1000)+200);
         while (execute) { 
-			//System.out.println("Movent nau numero " + this.numero);
 			try { Thread.sleep(this.v); } catch (Exception e) {}
 			moure();
 			destruirDisparos();

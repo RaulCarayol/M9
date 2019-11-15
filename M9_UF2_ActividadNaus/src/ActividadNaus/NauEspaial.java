@@ -102,6 +102,7 @@ class PanelNau extends JPanel implements Runnable{
 			if(!finJuego && numNaus != 0){
 				repaint();
 				try {
+					
 					mirarColisiones();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -146,7 +147,7 @@ class PanelNau extends JPanel implements Runnable{
 			for (int j = 0; j < disparos.size(); j++) {
 				if(disparos.elementAt(j).getDestruido()){
 					disparos.elementAt(j).interrupt();
-					nau.elementAt(j).setExecute(false);
+					disparos.elementAt(j).setExecute(false);
 					disparos.remove(j);
 					System.gc();
 				}
@@ -161,6 +162,7 @@ class PanelNau extends JPanel implements Runnable{
 				nau.elementAt(j).interrupt();
 				nau.elementAt(j).setExecute(false);
 				nau.remove(j);
+				System.out.println("Eliminado nave");
 				System.gc();
 			}
 		}
@@ -310,11 +312,10 @@ class PanelNau extends JPanel implements Runnable{
 				navePrincipal.setDy(+3);
 			}
 			if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-				if(disparos.size()<5){
+				if(disparos.size() < 6 ){
 
 					Disparo disparo=new Disparo(40, width,height,navePrincipal.getX() + (navePrincipal.getImage().getWidth(null) /2), navePrincipal.getY(),false);
 					disparos.add(disparo);
-					disparo.setPriority(1);
 					disparo.start();
 				}
 			}
