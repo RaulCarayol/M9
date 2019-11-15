@@ -29,7 +29,8 @@ public class Nave extends Thread{
 			y=height - image.getHeight(null)-40;
 			dy=0;
 			dx=0;
-			 Thread t = new Thread(this); 
+			 Thread t = new Thread(this);
+			 t.setPriority(8);
 			 t.start();
 		}
 		
@@ -156,10 +157,5 @@ public class Nave extends Thread{
 	    public Rectangle getBounds() {
 	        return new Rectangle(x, y, image.getWidth(null),image.getHeight(null));
 	    }
-	    
-	    
-
-
-
 }
 

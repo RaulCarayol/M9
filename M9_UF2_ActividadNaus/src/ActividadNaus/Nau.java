@@ -82,6 +82,7 @@ public class Nau extends Thread {
             
             }
         }
+    
     public void destruirDisparos(){
 				for (int j = 0; j < disparos.size(); j++) {
 					if(disparos.elementAt(j).getDestruido()){

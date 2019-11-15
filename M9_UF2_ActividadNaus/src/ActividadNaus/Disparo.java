@@ -78,13 +78,11 @@
 			int bucle=1;
 			image =(new ImageIcon(Nau.class.getResource("/images/explosion/explosion.png")).getImage());
 			pinta(g);
-			for (int m = 0; m < 3; m++) {
-				for (int i = 2; i < 61; i++) {
+				for (int i = 2; i < 1; i++) {
 					//for(int n=0; n< 60000; n++ ){}
 					image =(new ImageIcon(Nau.class.getResource("/images/explosion/explosion ("+i+").png")).getImage());
 					pinta(g);
 				}
-			}
 		}
 	
 		public int getX() {

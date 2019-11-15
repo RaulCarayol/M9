@@ -9,10 +9,8 @@ import java.awt.event.KeyListener;
 import java.util.Random;
 import java.awt.*;
 import java.util.*;
+
 import javax.swing.*;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class NauEspaial extends javax.swing.JFrame {    
 	    public NauEspaial() {
@@ -78,17 +76,17 @@ public class NauEspaial extends javax.swing.JFrame {
 	    	height=alto;
 	        //nau = new Nau[numNaus];
 	        for (int i=0;i<nau.capacity();i++) {
-	            //Random rand = new Random();
-	            //int velocitat=(rand.nextInt(3)+5)*2;
-	            //int posX=rand.nextInt(100)+30;
-	            //int posY=rand.nextInt(100)+30;
-	            //int dX=rand.nextInt(3)+10;
-	            //int dY=rand.nextInt(3)+10;
-	            int velocitat =(int) (((Math.random() * ((3 - 1) + 1)) + 1));
-	            int posX =(int) (((Math.random() * ((100 - 10) + 1)) + 10));
-	            int posY =(int) (((Math.random() * ((100 - 10) + 1)) + 10));
-	            int dX =(int) (((Math.random() * ((1 - 1) + 1)) + 1));
-	            int dY =(int) (((Math.random() * ((1 - 1) + 1)) + 1));
+	            Random rand = new Random();
+	            int velocitat=(rand.nextInt(3)+4);
+	            int posX=rand.nextInt(100)+30;
+	            int posY=rand.nextInt(100)+30;
+	            int dX=rand.nextInt(2)+3;
+	            int dY=rand.nextInt(2)+3;
+//	            int velocitat =(int) (((Math.random() * ((3 - 1) + 1)) + 1));
+//	            int posX =(int) (((Math.random() * ((100 - 10) + 1)) + 10));
+//	            int posY =(int) (((Math.random() * ((100 - 10) + 1)) + 10));
+//	            int dX =(int) (((Math.random() * ((1 - 1) + 1)) + 1));
+//	            int dY =(int) (((Math.random() * ((1 - 1) + 1)) + 1));
 
 	            nau.add( new Nau(i,posX,posY,dX,dY,velocitat,width,height));
 	            }
@@ -98,6 +96,7 @@ public class NauEspaial extends javax.swing.JFrame {
 	        //Thread hiloNavePrincipal = new Thread(navePrincipal);
 	        navePrincipal.start();
 	        Thread n = new Thread(this);
+	        n.setPriority(10);
 	        n.start();
 	        }
 
@@ -116,10 +115,11 @@ public class NauEspaial extends javax.swing.JFrame {
 	            		destruirDisparos();
 	            		destruirNaves();
 	            	}else{
-	            		if(numNaus == 0){
-	            		drawString(this.getGraphics(),"Has Ganado");
-	            		}else{
-	            		drawString(this.getGraphics(),"Game Over");}
+	            		String mensaje;
+	            		if(numNaus == 0){mensaje="Has Ganado";}else{ mensaje="Game Over";}
+	            		drawString(getGraphics(),mensaje,width,height/2,140);
+	            		drawString(getGraphics(),"ESC para salir",width,(height/2)+60,40);
+	            		drawString(getGraphics(),"ENTER nueva Partida",width,(height/2)+120,40);
 	            		Thread.interrupted();
 	            		for (int i = 0; i < nau.size(); i++) {
 							nau.elementAt(i).interrupt();
@@ -153,7 +153,7 @@ public class NauEspaial extends javax.swing.JFrame {
 							System.out.println("Destruido disparo");
 						}
 					}
-					} 	
+				} 	
 	    }
 	    
 	    public void destruirNaves(){
@@ -167,57 +167,69 @@ public class NauEspaial extends javax.swing.JFrame {
 					}
 				} 	
 
-	    private void drawString(Graphics g,String str) {
+	    private void drawString(Graphics g,String str,int x, int y, int tamanyo) {
 
-	        Font small = new Font("Helvetica", Font.BOLD, 140);
+	        Font small = new Font("Helvetica", Font.BOLD, tamanyo);
 	        FontMetrics fm = getFontMetrics(small);
 
 	        g.setColor(Color.WHITE);
 	        g.setFont(small);
-	        g.drawString(str, (width - fm.stringWidth(str)) / 2,
-	                height / 2);
+	        g.drawString(str, (x - fm.stringWidth(str)) / 2,
+	                y);
 	    }
 	    
 	    public synchronized void mirarColisiones() throws InterruptedException{
-	            Rectangle r3 = navePrincipal.getBounds();
-	            
-	            for (Nau alien : nau) {
-	                Rectangle r2 = alien.getBounds();
-	                if (r3.intersects(r2)) {
-	                	alien.setDsx(0);
-	                	alien.setDsy(0);
-	                	alien.interrupt();
-	                	finJuego=true;
-	                }
-	            }
+	    			comprobarColosionEnemigos();
+	    			
+	    			comprobarDisparos();
 
-	            for (Disparo m : disparos) {
-	                Rectangle r1 = m.getBounds();
-	                for (Nau alien : nau) {
-	                    Rectangle r2 = alien.getBounds();
-	                    if (r1.intersects(r2)) {
-	                    	alien.setDsx(0);
-		                	alien.setDsy(0);
-		                	alien.setDestruido(true);
-	                        m.colision(getGraphics());
-	                        numNaus--;
-	                    }
-	                }
-	            }
-	            
-	            for (int i = 0; i < nau.size(); i++) {
-	            if(!nau.elementAt(i).disparos.isEmpty()){
-	            for (Disparo d : nau.elementAt(i).disparos) {
-	                Rectangle r5 = d.getBounds();
-	                Rectangle r4 = navePrincipal.getBounds();
-	                    if (r5.intersects(r4)) {
-	                    	finJuego=true;
-		                	//d.setDestruido(true);
-	                        d.colision(getGraphics());
-	                    }   
-	            	}
-	            }}
+	    			comprobarDisparosEnemigos();
+
 	        }
+	    public void comprobarDisparos() throws InterruptedException{
+            for (Disparo m : disparos) {
+                Rectangle r1 = m.getBounds();
+                for (Nau alien : nau) {
+                    Rectangle r2 = alien.getBounds();
+                    if (r1.intersects(r2)) {
+                    	alien.setDsx(0);
+	                	alien.setDsy(0);
+	                	alien.setDestruido(true);
+                        m.colision(getGraphics());
+                        numNaus--;
+                    }
+                }
+            }
+	    }
+	    
+	    public void comprobarColosionEnemigos(){
+            Rectangle r3 = navePrincipal.getBounds();
+            for (Nau nauEnemiga : nau) {
+                Rectangle r2 = nauEnemiga.getBounds();
+                if (r3.intersects(r2)) {
+                	nauEnemiga.setDsx(0);
+                	nauEnemiga.setDsy(0);
+                	nauEnemiga.interrupt();
+                	finJuego=true;
+                }
+            }
+	    }
+	    
+	    public void comprobarDisparosEnemigos() throws InterruptedException{
+            for (int i = 0; i < nau.size(); i++) {
+            if(!nau.elementAt(i).disparos.isEmpty()){
+            for (Disparo d : nau.elementAt(i).disparos) {
+                Rectangle r5 = d.getBounds();
+                Rectangle r4 = navePrincipal.getBounds();
+                    if (r5.intersects(r4)) {
+                    	finJuego=true;
+	                	//d.setDestruido(true);
+                        d.colision(getGraphics());
+                    }   
+            	}
+            }
+           }
+	    }
 	    
 	    class KeyInputHandler extends KeyAdapter {
 		    @Override
@@ -253,7 +265,8 @@ public class NauEspaial extends javax.swing.JFrame {
 				if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 					Disparo disparo=new Disparo(40, width,height,navePrincipal.getX() + (navePrincipal.getImage().getWidth(null) /2), navePrincipal.getY(),false);
 					disparos.add(disparo);
-					disparo.start();	
+					disparo.setPriority(1);
+					disparo.start();
 				}
 				if(e.getKeyCode() == KeyEvent.VK_ENTER){
 					if(finJuego || numNaus==0){
