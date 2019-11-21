@@ -6,19 +6,13 @@ public class TestInetAddress {
 		InetAddress dir = null;
 		System.out.println("=====================================================");
 		System.out.println("SORTIDA PER A LOCALHOST");
-		
 		try {
-			//LOCALHOST
-			dir = InetAddress.getByName("localhost");
+			//la direccion se recibe como argumento 
+			dir = InetAddress.getByName(args[0].toString());
+			//Llama al metodo provaTots de la clase
 			provaTots(dir);
 			
-			//URL www.google.com
-			System.out.println("=====================================================");
-			System.out.println("SORTIDA PER A URL");
-			dir = InetAddress.getByName("www.google.com");
-			provaTots(dir);
-			
-			//Array tipus InetAddress amb totes les adreces IP de google.com
+			//Array tipus InetAddress amb totes les adreces IP
 			System.out.println("\tAdreces IP per a: "+dir.getHostName());
 			InetAddress[] adreces = InetAddress.getAllByName(dir.getHostName());
 			for (int i=0; i<adreces.length; i++) 
@@ -28,11 +22,10 @@ public class TestInetAddress {
 		} catch (UnknownHostException e1) {e1.printStackTrace();}
 		
 	}
-	
+	//Metodo que muestra las propiedades de la direccion que se le pasa
 	private static void provaTots(InetAddress dir) {
 		
 		InetAddress dir2;
-		
 		System.out.println("\tMètode getByName(): "+dir);
 		try {
 			dir2 = InetAddress.getLocalHost();
