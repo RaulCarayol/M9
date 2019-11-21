@@ -28,16 +28,23 @@ public class TestInetAddress {
 		InetAddress dir2;
 		System.out.println("\tMètode getByName(): "+dir);
 		try {
+			//devuelve el nombre y la ip
 			dir2 = InetAddress.getLocalHost();
 			System.out.println("\tMètode getLocalHost(): "+dir2);
 		} catch (UnknownHostException e) {e.printStackTrace();}
 		
 		//FEM SERVIR MÊTODES DE LA CLASSE
+		//Muestra el nombre del dominio  
 		System.out.println("\tMètode getHostName(): "+dir.getHostName());
+		//Muestra la direccion
 		System.out.println("\tMètode getHostAddress(): "+dir.getHostAddress());
+		//Muestra el nombre y la ip
 		System.out.println("\tMètode toString(): "+dir.toString());
+		//Muestra el nombre del dominio completo
 		System.out.println("\tMètode getCanonicalHostName(): "+dir.getCanonicalHostName());
 		
 	}
 
 }
+
+
