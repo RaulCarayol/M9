@@ -9,24 +9,28 @@ public class Exemple1URL {
 
 	public static void main (String[] args) throws MalformedURLException {
 		URL url = null;
-		if(args.length==0){
-			url = new URL("http://www.insbaixcamp.cat/moodle/");
-		}else if(args.length==1){
-			url= new URL(args[0]);
+		
+		//url por defecto
+		if(args.length==0){ url = new URL("http://www.insbaixcamp.org");
+		//url si ponemos puerto y ponemos solo la url
+		}else if(args.length==1){ url= new URL(args[0]);
+		//url con puerto
 		}else if(args.length==2){
-			String strurl =args[0];
+			//el segundo argumento es el puerto
 			int port = Integer.valueOf(args[1]);
-
-			url = new URL(strurl);
-			url = new URL(url.getProtocol(),url.getHost(),port,url.getFile());
+			//creamos una url con el primer argumento para posteriormente aplicar los metodos 
+			url = new URL(args[0]);
+			//constructor con puerto
+			url = new URL(url.getProtocol(),url.getHost(),port,url.getPath());
 		}
-
-		Visualitzar (url);
-		Codigo(url);
+		//Muestra informacion de la url
+		visualitzar (url);
+		//muestra el codigo de la url
+		codigo(url);
 
 	}
 
-	private static void Visualitzar(URL url) {
+	private static void visualitzar(URL url) {
 
 		System.out.println("\tURL complerta: "+url.toString());
 		System.out.println("\tgetProtocol: "+url.getProtocol());
@@ -41,11 +45,9 @@ public class Exemple1URL {
 	}
 
 
-	private static void Codigo(URL url) {
+	private static void codigo(URL url) {
 		BufferedReader in;
-
 		try {
-
 			InputStream inputStream = url.openStream();
 			in = new BufferedReader(new InputStreamReader(inputStream));
 			String inputLine;
