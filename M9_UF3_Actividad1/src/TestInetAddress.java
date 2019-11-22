@@ -18,7 +18,7 @@ public class TestInetAddress {
 			for (int i=0; i<adreces.length; i++) 
 				System.out.println("\t\t"+adreces[i].toString());
 			System.out.println("=====================================================");
-			
+		
 		} catch (UnknownHostException e1) {e1.printStackTrace();}
 		
 	}
