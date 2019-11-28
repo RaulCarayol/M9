@@ -43,9 +43,11 @@ public class M9_UF3_Actividad3 {
 			System.out.println("===============================================================");
 			System.out.println("Contingut de [url.getFile()]: " + url.getFile());
 			BufferedReader pagina = new BufferedReader(new InputStreamReader(url.openStream()));
-
+			//lee el codigo mietras no sea null
 			while ((cadena = pagina.readLine()) != null) {
-					if(cadena.contains(patron)){
+				//mira si la linia contiene el patron	
+				if(cadena.contains(patron)){
+					//imprime por pantalla la linia
 					System.out.println(cadena);
 					}	
 			}
