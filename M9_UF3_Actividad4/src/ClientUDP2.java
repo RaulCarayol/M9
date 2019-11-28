@@ -53,6 +53,5 @@ public class ClientUDP2 {
 		}
 		//Tanca el socket
 		clientSocket.close();
-
 	}
 }
