@@ -3,7 +3,7 @@ import java.io.InputStreamReader;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-public class M9_UF3_Actividad4 {
+public class ClientUDP2 {
 
 public static void main (String[] args) throws Exception {
 		
@@ -43,7 +43,4 @@ public static void main (String[] args) throws Exception {
 			clientSocket.close();
 			
 		}
-		
-
 }
-
