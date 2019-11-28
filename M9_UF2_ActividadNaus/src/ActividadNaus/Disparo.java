@@ -8,6 +8,8 @@
 	import java.util.concurrent.*;
 	
 	import javax.swing.ImageIcon;
+	
+	
 	public class Disparo extends Thread{
 		private int x,y;
 		private int velocidad;

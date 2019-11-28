@@ -180,7 +180,9 @@ class PanelNau extends JPanel implements Runnable{
 
 	//
 	public synchronized void mirarColisiones() throws InterruptedException{
+		//Grupo de hilos de colision
 		ThreadGroup colisiones = new ThreadGroup("hilos de colisiones");	
+		
 		Colision colision1 = new Colision(1);
 		Thread colisionEnemigo = new Thread(colision1);
 		colisionEnemigo.start();
@@ -195,7 +197,6 @@ class PanelNau extends JPanel implements Runnable{
 		Thread colisionDisparoEnemigo = new Thread(colision3);
 		colisionDisparoEnemigo.start();
 		colisionDisparoEnemigo =new Thread(colisiones,"hilo Colision Disparos Enemigo");
-
 	}
 
 	private class Colision implements Runnable{
@@ -223,7 +224,6 @@ class PanelNau extends JPanel implements Runnable{
 						e.printStackTrace();
 					}
 				}
-			
 			execute=false;
 			}
 		}
