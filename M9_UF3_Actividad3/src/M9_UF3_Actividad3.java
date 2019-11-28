@@ -4,15 +4,16 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class M9_UF3_Actividad3 {
-
 	@SuppressWarnings("rawtypes")
 	public static void main (String[] args) throws MalformedURLException {
+		//El primer argumento es la url
 		URL url= new URL(args[0]);
+		//el segundo argumento es el numero de capçalera
 		int numCapsalera = Integer.parseInt(args[1]);
+		//el tercer y ultimo argumento es el patrón
 		String patron = args[2];
-
+		
 		try {
 			String cadena;
 			URLConnection connexio = url.openConnection();
