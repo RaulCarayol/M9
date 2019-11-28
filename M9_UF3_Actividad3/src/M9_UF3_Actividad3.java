@@ -13,7 +13,7 @@ public class M9_UF3_Actividad3 {
 		int numCapsalera = Integer.parseInt(args[1]);
 		//el tercer y ultimo argumento es el patrón
 		String patron = args[2];
-		
+
 		try {
 			String cadena;
 			URLConnection connexio = url.openConnection();
@@ -49,7 +49,7 @@ public class M9_UF3_Actividad3 {
 				if(cadena.contains(patron)){
 					//imprime por pantalla la linia
 					System.out.println(cadena);
-					}	
+				}	
 			}
 		}
 		catch (MalformedURLException e) { e.printStackTrace();}
