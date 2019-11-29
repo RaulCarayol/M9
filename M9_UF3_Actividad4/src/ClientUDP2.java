@@ -22,6 +22,8 @@ public class ClientUDP2 {
 		//DADES DEL SERVIDOR al qual s'envia el missatge
 		InetAddress IPServidor = InetAddress.getLocalHost();
 		int port = 9800;
+		//Bucle while que pregunta siempre un mensaje 
+		//(he puesto un booleano de control pero al saltar la excepcion pararia)
 		while(seguir){
 		//INTRODUIR DADES PEL TECLAT
 		System.out.print("Introdueix missatge: ");
@@ -36,6 +38,7 @@ public class ClientUDP2 {
 		//REBENT DATAGRAMA DEL SERVIDOR
 		DatagramPacket rebut = new DatagramPacket(rebuts, rebuts.length);
 		System.out.println("Esperant datagrama...");
+		//limitamos el tiempo de espera en 5s (5000ms)
 		clientSocket.setSoTimeout(5000);
 		try{
 			clientSocket.receive(rebut);
@@ -46,9 +49,11 @@ public class ClientUDP2 {
 			int portOrigen = rebut.getPort();
 			System.out.println("\tProcedent de: "+IPOrigen+":"+portOrigen);
 			System.out.println("\tDades: "+majuscula.trim());
+		//recogemos la excepción de tiempo excedido por el socket
 		}catch(SocketTimeoutException e){
 			  	seguir=false;
-			  	System.out.println("Tiempo excedido");
+			  	//mostrar por pantalla tiempo excedido
+			  	System.out.println("\nTiempo excedido");
 			 }
 		}
 		//Tanca el socket
