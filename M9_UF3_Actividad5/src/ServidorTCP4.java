@@ -22,6 +22,7 @@ public class ServidorTCP4 {
 			//FLUX DE SORTIDA AL CLIENT
 			fsortida = new PrintWriter(clientConnectat.getOutputStream(), true);
 			System.out.println("Client " + (conexiones+1));
+			fsortida.println("Client " + (conexiones + 1));
 			
 			//FLUX D'ENTRADA DEL CLIENT
 			 fentrada = new BufferedReader(new InputStreamReader(clientConnectat.getInputStream()));
