@@ -1,24 +1,19 @@
+
 import java.net.*;
-import java.util.Scanner;
 import java.io.*;
 
-public class ServidorTCP4 {
+public class ServidorTCP3 {
 	
 	public static void main (String[] args) throws Exception {
-		
 		int numPort = 60000;
 		ServerSocket servidor = new ServerSocket(numPort);
 		String cadena = "";
 		int conexiones=0;
-		
-		Scanner teclado = new Scanner(System.in);
-		System.out.println("Numero N limite Conexiones");
-		int limiteConexiones = teclado.nextInt();
-		
+
 		PrintWriter fsortida = null;
 		BufferedReader fentrada = null;
 		
-		while(conexiones < limiteConexiones){
+		while(conexiones < 3){
 			System.out.println("Esperant connexió...");
 			Socket clientConnectat = servidor.accept();
 			//FLUX DE SORTIDA AL CLIENT
