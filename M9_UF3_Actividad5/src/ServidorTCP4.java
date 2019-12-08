@@ -10,10 +10,10 @@ public class ServidorTCP4 {
 		ServerSocket servidor = new ServerSocket(numPort);
 		String cadena = "";
 		int conexiones=0;
-		
-		Scanner teclado = new Scanner(System.in);
+
 		System.out.println("Numero N limite Conexiones");
-		int limiteConexiones = teclado.nextInt();
+		int limiteConexiones = Integer.valueOf(args[0]);
+		System.out.println(limiteConexiones);
 		
 		PrintWriter fsortida = null;
 		BufferedReader fentrada = null;
