@@ -24,7 +24,6 @@ public class ClientTCP2 {
 		cadena = in.readLine();
 		
 		while (cadena != null) {
-			
 			//Enviament cadena al servidor
 			fsortida.println(cadena);
 			//Rebuda cadena del servidor
@@ -32,7 +31,6 @@ public class ClientTCP2 {
 			System.out.println("  =>ECO: "+eco);
 			//Lectura del teclat
 			cadena = in.readLine();
-			
 			
 		}
 		

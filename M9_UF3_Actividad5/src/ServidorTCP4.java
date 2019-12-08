@@ -21,7 +21,7 @@ public class ServidorTCP4 {
 		while(conexiones < limiteConexiones){
 			//FLUX DE SORTIDA AL CLIENT
 			fsortida = new PrintWriter(clientConnectat.getOutputStream(), true);
-			
+			System.out.println("Client " + (conexiones+1));
 			
 			//FLUX D'ENTRADA DEL CLIENT
 			 fentrada = new BufferedReader(new InputStreamReader(clientConnectat.getInputStream()));
@@ -31,7 +31,6 @@ public class ServidorTCP4 {
 				fsortida.println(cadena);
 				System.out.println("Rebent: "+cadena);
 				if (cadena.equals("*")) break;
-				
 			}
 		}
 		
