@@ -6,6 +6,11 @@ public class ServidorTCP2 {
 	public static void main (String[] args) throws Exception {
 		
 		int numPort = 60000;
+		
+		DatagramSocket serverSocket = new DatagramSocket(9800);
+		byte[] rebuts = new byte[1024];
+		byte[] enviats = new byte[1024];
+
 		ServerSocket servidor = new ServerSocket(numPort);
 		String cadena = "";
 		
@@ -18,10 +23,8 @@ public class ServidorTCP2 {
 		
 		
 		//FLUX D'ENTRADA DEL CLIENT
-		
-		/*Conexion[] clientes = new Conexion[3];
+		Conexion[] clientes = new Conexion[3];
 		int conexiones=0;
-		String cadena;
 		boolean nuevaConexion=true;
 		int actualConexion = 0;
 		
@@ -59,8 +62,7 @@ public class ServidorTCP2 {
 				//ADREÇA ORIGEN
 				//InetAddress IPOrigen = paqRebuts.getAddress();
 				//int port = paqRebuts.getPort();
-				
-				
+								
 				//CONVERTIR CADENA A MAJÚSCULA
 				String majuscula = cadena.trim().toUpperCase();
 				enviats = majuscula.getBytes();
@@ -72,7 +74,7 @@ public class ServidorTCP2 {
 				
 				//Per acabar
 				if (cadena.trim().equals("*")) break;
-			}*/
+			}
 			
 	BufferedReader fentrada = new BufferedReader(new InputStreamReader(clientConnectat.getInputStream()));
 		
@@ -80,10 +82,8 @@ public class ServidorTCP2 {
 			
 			fsortida.println(cadena);
 			System.out.println("Rebent: "+cadena);
-			if (cadena.equals("*")) break;
-			
+			if (cadena.equals("*")) break;	
 		}
-		
 		//TANCAR STREAMS I SOCKETS
 		System.out.println("Tancant connexió... ");
 		fentrada.close();
@@ -92,6 +92,7 @@ public class ServidorTCP2 {
 		servidor.close();
 		
 	}
-
+	}
 }
+
 
