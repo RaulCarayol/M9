@@ -1,4 +1,5 @@
 import java.net.*;
+import java.util.Scanner;
 import java.io.*;
 
 public class ServidorTCP4 {
@@ -9,24 +10,29 @@ public class ServidorTCP4 {
 		ServerSocket servidor = new ServerSocket(numPort);
 		String cadena = "";
 		int conexiones=0;
-		
+		Scanner teclado = new Scanner(System.in);
+		System.out.println("Numero N limite Conexiones");
+		int limiteConexiones = teclado.nextInt();
+		PrintWriter fsortida = null;
+		BufferedReader fentrada = null;
 		System.out.println("Esperant connexió... ");
 		Socket clientConnectat = servidor.accept();
 		System.out.println("Client connectat... ");
-		
-		//FLUX DE SORTIDA AL CLIENT
-		PrintWriter fsortida = new PrintWriter(clientConnectat.getOutputStream(), true);
-		
-		
-		//FLUX D'ENTRADA DEL CLIENT
-		BufferedReader fentrada = new BufferedReader(new InputStreamReader(clientConnectat.getInputStream()));
-		
-		while ((cadena = fentrada.readLine()) != null) {
+		while(conexiones < limiteConexiones){
+			//FLUX DE SORTIDA AL CLIENT
+			fsortida = new PrintWriter(clientConnectat.getOutputStream(), true);
 			
-			fsortida.println(cadena);
-			System.out.println("Rebent: "+cadena);
-			if (cadena.equals("*")) break;
 			
+			//FLUX D'ENTRADA DEL CLIENT
+			 fentrada = new BufferedReader(new InputStreamReader(clientConnectat.getInputStream()));
+			
+			while ((cadena = fentrada.readLine()) != null) {
+				
+				fsortida.println(cadena);
+				System.out.println("Rebent: "+cadena);
+				if (cadena.equals("*")) break;
+				
+			}
 		}
 		
 		//TANCAR STREAMS I SOCKETS
