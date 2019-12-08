@@ -32,8 +32,8 @@ public class ClientTCP2 {
 			//Enviament cadena al servidor
 			fsortida.println(cadena);
 			//Rebuda cadena del servidor
-			eco = fentrada.readLine();
-			System.out.println("  =>ECO: "+eco);
+			msj = fentrada.readLine();
+			System.out.println("  =>ECO: "+msj);
 			//Lectura del teclat
 			cadena = in.readLine();
 			
