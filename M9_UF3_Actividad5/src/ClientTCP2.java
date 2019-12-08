@@ -6,6 +6,7 @@ public class ClientTCP2 {
 	public static void main (String[] args) throws Exception {
 		
 		String host = "localhost";
+		String msj;
 		int port = 60000;//Port remot
 		Socket client = new Socket(host, port);
 		
@@ -18,6 +19,10 @@ public class ClientTCP2 {
 		//FLUX PER A ENTRADA ESTÀNDARD
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		
+		// mensaje al conectarse al servidor
+		msj = fentrada.readLine();
+		System.out.println(msj);
+				
 		String cadena, eco = "";
 		System.out.println("Introdueix la cadena: ");
 		//Lectura teclat
@@ -33,13 +38,11 @@ public class ClientTCP2 {
 			cadena = in.readLine();
 			
 		}
-		
 		fsortida.close();
 		fentrada.close();
 		System.out.println("Finalització de l'enviament...");
 		in.close();
 		client.close();
-		
 	}
 		
 }
