@@ -8,6 +8,7 @@ public class ServidorTCP4 {
 		int numPort = 60000;
 		ServerSocket servidor = new ServerSocket(numPort);
 		String cadena = "";
+		int conexiones=0;
 		
 		System.out.println("Esperant connexió... ");
 		Socket clientConnectat = servidor.accept();
