@@ -29,6 +29,7 @@ public class Fil implements Runnable {
 			
 			while ((cadena = fentrada.readLine()) != null && !finHilo) {
 				fsortida.println(cadena);
+				System.out.println(nombreCliente);
 				System.out.println("Rebent: "+cadena);
 				if (cadena.equals("*")){ 
 						fentrada.close();
@@ -36,7 +37,6 @@ public class Fil implements Runnable {
 						finHilo = true;
 					}
 			}
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
