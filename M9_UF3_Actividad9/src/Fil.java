@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-
 public class Fil implements Runnable {
 	Socket socket;
 	String nombreCliente,cadena;
