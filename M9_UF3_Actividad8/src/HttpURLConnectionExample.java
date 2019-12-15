@@ -29,8 +29,8 @@ public class HttpURLConnectionExample {
 			}
 			if(metodo.equalsIgnoreCase("put") || metodo.equalsIgnoreCase("post")){
 				sendGet();
-			}else if((metodo.equalsIgnoreCase("get"))){
-				System.out.println("\n( P O S T )");
+			}else{
+				sendPost();
 			}
 		}
 
@@ -77,7 +77,7 @@ public class HttpURLConnectionExample {
 	}
 	
 	// HTTP POST request
-	private void sendPost(String lengua, String urlParameters) throws Exception {
+	private static void sendPost() throws Exception {
 		Scanner teclado2 = new Scanner(System.in);
 		System.out.println("\n( P O S T )");
 		System.out.println("Escribe User-Agent (ej: HTTP/1.0, Mozilla/5.0)");
@@ -86,10 +86,10 @@ public class HttpURLConnectionExample {
 		System.out.println("Escribe URL: ");
 		String url = teclado2.nextLine();
 		System.out.println("Escribe formato lengua (ej: UTF-8, ca-es)");
-		lengua = teclado2.nextLine();	
+		String lengua = teclado2.nextLine();	
 
 		System.out.println("Escribe URL Parameters: ");
-		urlParameters = teclado2.nextLine();
+		String urlParameters = teclado2.nextLine();
 		teclado2.close();
 		
 		URL obj = new URL(url);
