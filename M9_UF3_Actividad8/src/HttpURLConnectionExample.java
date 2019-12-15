@@ -17,11 +17,16 @@ public class HttpURLConnectionExample {
 	public static void main(String[] args) throws Exception {
 		Scanner teclado = new Scanner(System.in);
 		boolean finPorgrama = false;
+		String metodo;
 		while(!finPorgrama){
 			System.out.println("Que Metodo quieres (Escribe get para GET o put para PUT )");
-			if(teclado.next().equalsIgnoreCase("get")){
-				
-			}else{
+			metodo = teclado.next();
+			while(! (metodo.equalsIgnoreCase("get") || metodo.equalsIgnoreCase("put") || metodo.equalsIgnoreCase("post"))){
+				System.out.println("Escoge una opcion de las dos");
+				System.out.println("Que Metodo quieres (Escribe get para GET o put para PUT )");
+				metodo = teclado.next();
+			}
+			if(metodo.equalsIgnoreCase("put") || metodo.equalsIgnoreCase("post")){
 				
 			}
 		}
