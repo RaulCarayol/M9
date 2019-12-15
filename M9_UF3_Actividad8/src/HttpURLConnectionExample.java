@@ -4,6 +4,8 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Scanner;
+
 import javax.net.ssl.HttpsURLConnection;
 //El programa demana si vol fer servir el mètode GET o PUT.
 //Després aquest paràmetre el programa demana 
@@ -13,6 +15,7 @@ public class HttpURLConnectionExample {
 	private final String USER_AGENT = "Mozilla/5.0";
 
 	public static void main(String[] args) throws Exception {
+		Scanner teclado = new Scanner(System.in);
 
 		HttpURLConnectionExample http = new HttpURLConnectionExample();
 
