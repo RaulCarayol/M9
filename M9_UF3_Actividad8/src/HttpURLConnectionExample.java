@@ -41,18 +41,12 @@ public class HttpURLConnectionExample {
 				System.out.println("\n( P O S T )");
 			}
 		}
-		HttpURLConnectionExample http = new HttpURLConnectionExample();
 
-		System.out.println("Testing 1 - Send Http GET request");
-		http.sendGet();
-		
-		System.out.println("\nTesting 2 - Send Http POST request");
-		http.sendPost();
 		teclado.close();
 	}
 
 	// HTTP GET request
-	private void sendGet(String url,String userAgent) throws Exception {
+	private static void sendGet(String url,String userAgent) throws Exception {
 		
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -61,7 +55,7 @@ public class HttpURLConnectionExample {
 		con.setRequestMethod("GET");
 
 		//add request header
-		con.setRequestProperty("User-Agent", USER_AGENT);
+		con.setRequestProperty("User-Agent", userAgent);
 
 		int responseCode = con.getResponseCode();
 		System.out.println("\nSending 'GET' request to URL : " + url);
@@ -83,19 +77,15 @@ public class HttpURLConnectionExample {
 	}
 	
 	// HTTP POST request
-	private void sendPost() throws Exception {
+	private void sendPost(String lengua,String userAgent,  String url, String urlParameters) throws Exception {
 
-		String url = "http://www.insbaixcamp.cat/moodle/";
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 		//add reuqest header
 		con.setRequestMethod("POST");
-		con.setRequestProperty("User-Agent", USER_AGENT);
+		con.setRequestProperty("User-Agent", userAgent);
 		con.setRequestProperty("Accept-Language", "ca-es");
-		
-		//Query string
-		String urlParameters = "categoryid=7";
 		
 		// Send post request
 		con.setDoOutput(true);
