@@ -52,9 +52,7 @@ public class HttpURLConnectionExample {
 	}
 
 	// HTTP GET request
-	private void sendGet() throws Exception {
-
-		String url = "http://www.insbaixcamp.org/";
+	private void sendGet(String url,String userAgent) throws Exception {
 		
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
