@@ -21,19 +21,37 @@ public class HttpURLConnectionExample {
 		String metodo;
 		while(!finPorgrama){
 			System.out.println("Que Metodo quieres (Escribe get para GET o put para PUT )");
-			metodo = teclado.next();
+			metodo = teclado.nextLine();
 			while(! (metodo.equalsIgnoreCase("get") || metodo.equalsIgnoreCase("put") || metodo.equalsIgnoreCase("post"))){
 				System.out.println("Escoge una opcion de las dos");
-				System.out.println("Que Metodo quieres (Escribe get para GET o put para PUT )");
-				metodo = teclado.next();
+				System.out.println("Que Metodo quieres (Escribe get para GET o put para POST )");
+				metodo = teclado.nextLine();
 			}
 			if(metodo.equalsIgnoreCase("put") || metodo.equalsIgnoreCase("post")){
-				sendGet();
+				System.out.println("\n( P O S T )");
+				System.out.println("Escribe User-Agent (ej: HTTP/1.0, Mozilla/5.0)");
+				String userAgent = teclado.nextLine();		
+
+				System.out.println("Escribe URL: ");
+				String url = teclado.nextLine();
+				System.out.println("Escribe formato lengua (ej: UTF-8, ca-es)");
+				String idioma = teclado.nextLine();	
+
+				System.out.println("Escribe URL Parameters: ");
+				String urlParameters = teclado.nextLine();
+				sendPost(url,userAgent,urlParameters,idioma);
 			}else{
-				sendPost();
+				System.out.println("\n( G E T )");
+				System.out.println("Escribe User-Agent (ej: HTTP/1.0, Mozilla/5.0)");
+				String userAgent = teclado.nextLine();		
+
+				System.out.println("Escribe URL: ");
+				String url = teclado.nextLine();
+				sendGet(url,userAgent);
 			}
 			System.out.println("Quieres continuar ?(S-si,N-no)");
-			if(teclado.next().equalsIgnoreCase("N") || teclado.next().equalsIgnoreCase("no")){
+			metodo = teclado.next();
+			if(metodo.equalsIgnoreCase("N") || metodo.equalsIgnoreCase("no")){
 				finPorgrama=true;
 			}
 		}
@@ -42,15 +60,7 @@ public class HttpURLConnectionExample {
 	}
 
 	// HTTP GET request
-	private static void sendGet() throws Exception {
-		Scanner teclado2 = new Scanner(System.in);
-		System.out.println("\n( G E T )");
-		System.out.println("Escribe User-Agent (ej: HTTP/1.0, Mozilla/5.0)");
-		String userAgent = teclado2.nextLine();		
-
-		System.out.println("Escribe URL: ");
-		String url = teclado2.nextLine();		
-		teclado2.close();
+	private static void sendGet(String url,String userAgent) throws Exception {
 		
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -81,20 +91,7 @@ public class HttpURLConnectionExample {
 	}
 	
 	// HTTP POST request
-	private static void sendPost() throws Exception {
-		Scanner teclado2 = new Scanner(System.in);
-		System.out.println("\n( P O S T )");
-		System.out.println("Escribe User-Agent (ej: HTTP/1.0, Mozilla/5.0)");
-		String userAgent = teclado2.nextLine();		
-
-		System.out.println("Escribe URL: ");
-		String url = teclado2.nextLine();
-		System.out.println("Escribe formato lengua (ej: UTF-8, ca-es)");
-		String lengua = teclado2.nextLine();	
-
-		System.out.println("Escribe URL Parameters: ");
-		String urlParameters = teclado2.nextLine();
-		teclado2.close();
+	private static void sendPost(String url,String userAgent,String urlParameters,String idioma) throws Exception {
 		
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -102,7 +99,7 @@ public class HttpURLConnectionExample {
 		//add reuqest header
 		con.setRequestMethod("POST");
 		con.setRequestProperty("User-Agent", userAgent);
-		con.setRequestProperty("Accept-Language", "ca-es");
+		con.setRequestProperty("Accept-Language", idioma);
 		
 		// Send post request
 		con.setDoOutput(true);
@@ -128,7 +125,6 @@ public class HttpURLConnectionExample {
 		
 		//print result
 		System.out.println(response.toString());
-
 	}
 
 }
