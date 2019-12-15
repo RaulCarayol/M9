@@ -32,6 +32,10 @@ public class HttpURLConnectionExample {
 			}else{
 				sendPost();
 			}
+			System.out.println("Quieres continuar ?(S-si,N-no)");
+			if(teclado.next().equalsIgnoreCase("N") || teclado.next().equalsIgnoreCase("no")){
+				finPorgrama=true;
+			}
 		}
 
 		teclado.close();
