@@ -28,15 +28,7 @@ public class HttpURLConnectionExample {
 				metodo = teclado.next();
 			}
 			if(metodo.equalsIgnoreCase("put") || metodo.equalsIgnoreCase("post")){
-				System.out.println("\n( G E T )");
-				System.out.println("Escribe User-Agent (ej: HTTP/1.0, Mozilla/5.0)");
-				String userAgent = teclado.nextLine();		
-
-				System.out.println("Escribe URL: ");
-				String url = teclado.nextLine();		
-
-				// Llamamos al método para la petición GET
-				sendGet(userAgent, url);
+				sendGet();
 			}else if((metodo.equalsIgnoreCase("get"))){
 				System.out.println("\n( P O S T )");
 			}
@@ -46,7 +38,15 @@ public class HttpURLConnectionExample {
 	}
 
 	// HTTP GET request
-	private static void sendGet(String url,String userAgent) throws Exception {
+	private static void sendGet() throws Exception {
+		Scanner teclado2 = new Scanner(System.in);
+		System.out.println("\n( G E T )");
+		System.out.println("Escribe User-Agent (ej: HTTP/1.0, Mozilla/5.0)");
+		String userAgent = teclado2.nextLine();		
+
+		System.out.println("Escribe URL: ");
+		String url = teclado2.nextLine();		
+		teclado2.close();
 		
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
