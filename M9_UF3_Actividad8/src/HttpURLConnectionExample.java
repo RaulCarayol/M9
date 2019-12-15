@@ -4,6 +4,7 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.file.attribute.UserDefinedFileAttributeView;
 import java.util.Scanner;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -27,7 +28,17 @@ public class HttpURLConnectionExample {
 				metodo = teclado.next();
 			}
 			if(metodo.equalsIgnoreCase("put") || metodo.equalsIgnoreCase("post")){
-				
+				System.out.println("\n( G E T )");
+				System.out.println("Escribe User-Agent (ej: HTTP/1.0, Mozilla/5.0)");
+				String userAgent = teclado.nextLine();		
+
+				System.out.println("Escribe URL: ");
+				String url = teclado.nextLine();		
+
+				// Llamamos al método para la petición GET
+				sendGet(userAgent, url);
+			}else if((metodo.equalsIgnoreCase("get"))){
+				System.out.println("\n( P O S T )");
 			}
 		}
 		HttpURLConnectionExample http = new HttpURLConnectionExample();
