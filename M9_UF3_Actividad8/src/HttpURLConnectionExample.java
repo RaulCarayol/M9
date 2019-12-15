@@ -5,7 +5,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
-
+//El programa demana si vol fer servir el mètode GET o PUT.
+//Després aquest paràmetre el programa demana 
+//la resta de paràmetres per consultar el codi de la URL que també li passa com a paràmetres.
 public class HttpURLConnectionExample {
 
 	private final String USER_AGENT = "Mozilla/5.0";
