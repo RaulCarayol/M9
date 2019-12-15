@@ -16,7 +16,15 @@ public class HttpURLConnectionExample {
 
 	public static void main(String[] args) throws Exception {
 		Scanner teclado = new Scanner(System.in);
-
+		boolean finPorgrama = false;
+		while(!finPorgrama){
+			System.out.println("Que Metodo quieres (Escribe get para GET o put para PUT )");
+			if(teclado.next().equalsIgnoreCase("get")){
+				
+			}else{
+				
+			}
+		}
 		HttpURLConnectionExample http = new HttpURLConnectionExample();
 
 		System.out.println("Testing 1 - Send Http GET request");
@@ -24,7 +32,7 @@ public class HttpURLConnectionExample {
 		
 		System.out.println("\nTesting 2 - Send Http POST request");
 		http.sendPost();
-
+		teclado.close();
 	}
 
 	// HTTP GET request
