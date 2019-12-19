@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-
 public class Client {
 
 	public static void main(String[] args) throws UnknownHostException, IOException {
@@ -24,23 +23,28 @@ public class Client {
 		//FLUX PER A ENTRADA ESTÀNDARD
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		
+		System.out.println("Introduce tu nombre : ");
+		//Lectura teclat
+		cadena = in.readLine();
+		fsortida.println(cadena);
+		
 		// mensaje al conectarse al servidor
 		msj = fentrada.readLine();
 		System.out.println(msj);
-				
-		System.out.println("Introdueix la cadena: ");
-		//Lectura teclat
-		cadena = in.readLine();
 		
+		FilClient filclient = new FilClient(client,fentrada);
+		Thread filThread = new Thread(filclient);
+		filThread.start();
+		
+		cadena = in.readLine();
 		while (cadena != null) {
 			//Enviament cadena al servidor
 			fsortida.println(cadena);
 			//Rebuda cadena del servidor
-			msj = fentrada.readLine();
-			System.out.println("  =>ECO: "+msj);
+			//msj = fentrada.readLine();
+			//System.out.println("  =>ECO: "+msj);
 			//Lectura del teclat
 			cadena = in.readLine();
-			
 		}
 		fsortida.close();
 		fentrada.close();
