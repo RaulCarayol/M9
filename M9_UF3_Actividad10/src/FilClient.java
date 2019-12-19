@@ -24,7 +24,7 @@ public class FilClient implements Runnable {
             	//codigo = "0_jose_hola que tal"
             	String codigo = fentrada.readLine();
             	
-                System.out.println("\n" + codigo);
+                System.out.println(codigo);
                 /*
                 // prints the username after displaying the server's message
                 if (client.getUserName() != null) {
