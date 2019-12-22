@@ -12,9 +12,9 @@ public class Fil implements Runnable {
 	BufferedReader fentrada;
 	int numConexion;
 	public Fil(int numConexion) throws IOException{
-		this.nombreCliente = Servidor.nombreClientes[numConexion];
 		fsortida=null;
 		this.numConexion = numConexion;
+		this.nombreCliente = Servidor.nombreClientes[this.numConexion];
 		fsortida = new PrintWriter(Servidor.arraySockets[this.numConexion].getOutputStream(), true);
 		System.out.println(nombreCliente+" connectat... ");
 		fsortida.println(nombreCliente);
