@@ -18,7 +18,7 @@ public class FilServidorEscriure implements Runnable {
 		
 		while (cadena != null) {
 			System.out.println("->Servidor: "+cadena);
-			Fil.enviarATodos("S"+cadena);
+			Fil.enviarATodos("S"+cadena,"Servidor");
 			cadena = in.readLine();
 		}
 		in.close();	
