@@ -6,9 +6,9 @@ import java.net.Socket;
 
 
 public class Fil implements Runnable {
-	String nombreCliente;
+	static String nombreCliente;
 	String cadena;
-	PrintWriter fsortida;
+	static PrintWriter fsortida;
 	BufferedReader fentrada;
 	int numConexion;
 	public Fil(int numConexion) throws IOException{
@@ -27,8 +27,16 @@ public class Fil implements Runnable {
 		try {
 			cadena = fentrada.readLine();
 			while (cadena != null && !finHilo) {
-				//fsortida.println(cadena);
+				if(cadena.charAt(0) == '1'){
+					for (int i = 0; i < Servidor.nombreClientes.length; i++) {
+						if(Servidor.nombreClientes[i].equals(cadena.split("_")[1].toString())){
+							fsortida = new PrintWriter(Servidor.arraySockets[i].getOutputStream(), true);
+							fsortida.println("["+nombreCliente+"]: " + cadena.split("_")[2].toString());
+						}
+					}
+				}else{
 				enviarATodos(cadena);
+				}
 				System.out.println(nombreCliente);
 				System.out.println("Rebent: "+cadena);
 				if (cadena.equals("*")){ 
@@ -43,12 +51,16 @@ public class Fil implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	private void enviarATodos(String mensaje) throws IOException{
+	static void enviarATodos(String mensaje) throws IOException{
 		System.out.println(nombreCliente+" enviando a todos...");
 		for (int i = 0; i < Servidor.arraySockets.length; i++) {
 			if(Servidor.arraySockets[i] != null){
 				fsortida = new PrintWriter(Servidor.arraySockets[i].getOutputStream(), true);
+				if(mensaje.charAt(0) == 'S'){
+					fsortida.println("|| Servidor ||: " + mensaje.substring(1));
+				}else{
 				fsortida.println("["+nombreCliente+"]: " + mensaje);
+				}
 			}
 		}
 	}

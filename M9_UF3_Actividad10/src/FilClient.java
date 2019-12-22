@@ -21,16 +21,9 @@ public class FilClient implements Runnable {
     	boolean inicio = true;
         while (inicio) {
             try {
-            	//codigo = "0_jose_hola que tal"
             	String codigo = fentrada.readLine();
-            	
                 System.out.println(codigo);
-                /*
-                // prints the username after displaying the server's message
-                if (client.getUserName() != null) {
-                    System.out.print("[" + client.getUserName() + "]: ");
-                }
-                */
+
             } catch (IOException ex) {
                 System.out.println("Error reading from server: " + ex.getMessage());
                 ex.printStackTrace();

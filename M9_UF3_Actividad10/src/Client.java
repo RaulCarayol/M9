@@ -39,11 +39,8 @@ public class Client {
 		cadena = in.readLine();
 		while (cadena != null) {
 			//Enviament cadena al servidor
+			//codigo = "1_cliente_mensaje"
 			fsortida.println(cadena);
-			//Rebuda cadena del servidor
-			//msj = fentrada.readLine();
-			//System.out.println("  =>ECO: "+msj);
-			//Lectura del teclat
 			cadena = in.readLine();
 		}
 		fsortida.close();
